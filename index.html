@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Duo Class · Educación premium</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600&display=swap" rel="stylesheet" />
+  <style>
+    /* RESET + BASE */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 72px;
+    }
+    body {
+      background-color: #0A1128;
+      color: #F4F4F9;
+      font-family: 'Inter', sans-serif;
+      font-weight: 400;
+      line-height: 1.5;
+      overflow-x: hidden;
+    }
+    h1, h2, h3, .giant-text {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* HEADER STICKY */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(10, 17, 40, 0.85);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(0, 230, 118, 0.15);
+      padding: 0.9rem 0;
+    }
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+    .logo {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 800;
+      font-size: 1.7rem;
+      color: white;
+      letter-spacing: -0.03em;
+    }
+    .logo span {
+      color: #00E676;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2.2rem;
+      font-weight: 500;
+      font-size: 0.95rem;
+      list-style: none;
+    }
+    .nav-links a {
+      color: #e0e7f0;
+      text-decoration: none;
+      transition: color 0.2s;
+      border-bottom: 2px solid transparent;
+      padding-bottom: 2px;
+    }
+    .nav-links a:hover {
+      color: #00E676;
+      border-bottom-color: #00E676;
+    }
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+    .btn-neon {
+      background: transparent;
+      border: 2px solid #00E676;
+      color: #00E676;
+      padding: 0.5rem 1.4rem;
+      border-radius: 60px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: 'Inter', sans-serif;
+      background: rgba(0, 230, 118, 0.05);
+      letter-spacing: 0.3px;
+      white-space: nowrap;
+    }
+    .btn-neon:hover {
+      background: #00E676;
+      color: #0A1128;
+      box-shadow: 0 0 20px #00e67655;
+    }
+    .btn-neon-whatsapp {
+      background: #00E676;
+      border: none;
+      color: #0A1128;
+      padding: 0.6rem 1.6rem;
+      border-radius: 60px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: 'Inter', sans-serif;
+      box-shadow: 0 0 12px #00e67655;
+    }
+    .btn-neon-whatsapp:hover {
+      background: #00c853;
+      transform: scale(1.02);
+      box-shadow: 0 0 24px #00e67699;
+    }
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+    }
+    .hamburger span {
+      width: 28px;
+      height: 3px;
+      background: #f4f4f9;
+      border-radius: 4px;
+      transition: 0.2s;
+    }
+
+    /* HERO */
+    .hero {
+      background: #0A1128;
+      padding: 4rem 0 3rem;
+    }
+    .hero-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+    .hero h1 {
+      font-size: clamp(2.8rem, 12vw, 5.5rem);
+      font-weight: 900;
+      line-height: 1.05;
+      max-width: 900px;
+      color: white;
+      letter-spacing: -0.03em;
+    }
+    .hero h1 .highlight {
+      color: #00E676;
+      display: inline-block;
+    }
+    .hero p {
+      font-size: 1.25rem;
+      max-width: 720px;
+      color: #bcc9e0;
+      margin-top: 1.2rem;
+      line-height: 1.6;
+      font-weight: 400;
+    }
+    .hero .btn-group {
+      margin-top: 2.2rem;
+    }
+    .btn-hero {
+      background: #00E676;
+      border: none;
+      padding: 1.1rem 2.8rem;
+      border-radius: 80px;
+      font-weight: 700;
+      font-size: 1.25rem;
+      color: #0A1128;
+      cursor: pointer;
+      transition: all 0.2s;
+      box-shadow: 0 0 24px #00e67666;
+      font-family: 'Inter', sans-serif;
+    }
+    .btn-hero:hover {
+      background: #00c853;
+      transform: scale(1.03);
+      box-shadow: 0 0 40px #00e676aa;
+    }
+
+    /* MARQUEE */
+    .marquee-wrap {
+      background: #0d1a2e;
+      padding: 1rem 0;
+      border-top: 1px solid #1f304a;
+      border-bottom: 1px solid #1f304a;
+      overflow: hidden;
+    }
+    .marquee-track {
+      display: flex;
+      white-space: nowrap;
+      animation: scrollMarquee 22s linear infinite;
+      font-weight: 600;
+      font-size: 1.1rem;
+      letter-spacing: 1px;
+      color: #b0c8e5;
+    }
+    .marquee-track span {
+      display: inline-block;
+      padding: 0 2.5rem;
+    }
+    .marquee-track span::after {
+      content: "•";
+      margin-left: 2.5rem;
+      color: #00E676;
+    }
+    .marquee-track span:last-child::after {
+      content: "";
+      margin: 0;
+    }
+    @keyframes scrollMarquee {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* SECCIONES */
+    section {
+      padding: 5rem 0;
+    }
+    .bg-cream {
+      background: #F4F4F9;
+      color: #0A1128;
+    }
+    .bg-dark {
+      background: #0A1128;
+      color: #F4F4F9;
+    }
+    .section-title {
+      font-size: clamp(2.8rem, 6vw, 4.2rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      margin-bottom: 1.8rem;
+    }
+    .section-sub {
+      font-size: 1.2rem;
+      max-width: 700px;
+      color: #cbd5e1;
+    }
+
+    /* DIFERENCIAL (sin cards) */
+    .diferencial-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 3.5rem;
+      margin-top: 2.5rem;
+    }
+    .diferencial-item {
+      max-width: 900px;
+    }
+    .diferencial-item h3 {
+      font-size: clamp(2.4rem, 5vw, 3.8rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: #0A1128;
+    }
+    .diferencial-item h3 .accent {
+      color: #00c853;
+    }
+    .diferencial-item p {
+      font-size: 1.2rem;
+      max-width: 650px;
+      color: #1f2a3f;
+      font-weight: 400;
+      margin-top: 0.2rem;
+    }
+
+    /* SPLIT SCREEN */
+    .split-section {
+      display: flex;
+      flex-wrap: wrap;
+      min-height: 420px;
+    }
+    .split-left, .split-right {
+      flex: 1 1 50%;
+      padding: 3rem 2.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .split-left {
+      background: #0A1128;
+      color: white;
+    }
+    .split-right {
+      background: #F4F4F9;
+      color: #0A1128;
+    }
+    .split-title {
+      font-size: clamp(2.2rem, 4vw, 3.4rem);
+      font-weight: 800;
+      margin-bottom: 0.75rem;
+      letter-spacing: -0.02em;
+    }
+    .split-vinetas {
+      list-style: none;
+      font-size: 1.1rem;
+      line-height: 2;
+      font-weight: 400;
+    }
+    .split-vinetas li::before {
+      content: "▹ ";
+      color: #00E676;
+      font-weight: 800;
+    }
+    .split-right .split-vinetas li::before {
+      color: #0A1128;
+    }
+
+    /* METODOLOGIA (lista vertical) */
+    .metodo-list {
+      display: flex;
+      flex-direction: column;
+      gap: 2.8rem;
+      margin-top: 2rem;
+    }
+    .metodo-item {
+      display: flex;
+      align-items: baseline;
+      gap: 1.8rem;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      padding-bottom: 1.8rem;
+    }
+    .metodo-num {
+      font-size: 4.5rem;
+      font-weight: 900;
+      color: #00E676;
+      font-family: 'Space Grotesk', sans-serif;
+      line-height: 1;
+      min-width: 80px;
+    }
+    .metodo-content h4 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 0.2rem;
+    }
+    .metodo-content p {
+      max-width: 700px;
+      color: #d0dcee;
+    }
+
+    /* FOOTER CTA */
+    .footer-cta {
+      background: #0A1128;
+      padding: 5rem 1rem;
+      text-align: center;
+      border-top: 1px solid #1f304a;
+    }
+    .footer-cta h2 {
+      font-size: clamp(2.6rem, 8vw, 5rem);
+      font-weight: 900;
+      max-width: 1000px;
+      margin: 0 auto 1.2rem;
+      line-height: 1.1;
+    }
+    .footer-cta p {
+      font-size: 1.4rem;
+      color: #bcc9e0;
+      max-width: 600px;
+      margin: 0 auto 2.5rem;
+    }
+    .btn-pulse {
+      background: #00E676;
+      border: none;
+      padding: 1.2rem 3.5rem;
+      border-radius: 80px;
+      font-weight: 700;
+      font-size: 1.8rem;
+      color: #0A1128;
+      cursor: pointer;
+      animation: pulse 2s infinite;
+      font-family: 'Inter', sans-serif;
+      box-shadow: 0 0 40px #00e67666;
+      transition: 0.2s;
+    }
+    .btn-pulse:hover {
+      background: #00c853;
+      transform: scale(1.02);
+    }
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 #00e67666; }
+      70% { box-shadow: 0 0 0 20px #00e67600; }
+      100% { box-shadow: 0 0 0 0 #00e67600; }
+    }
+    .copyright {
+      margin-top: 4rem;
+      color: #5f7396;
+      font-size: 0.9rem;
+    }
+
+    /* ANIMACIONES FADE */
+    .fade-section {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.9s ease, transform 0.9s ease;
+    }
+    .fade-section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        gap: 0.8rem;
+        padding: 1.2rem 0;
+        background: #0A1128;
+        border-top: 1px solid #1f304a;
+      }
+      .nav-links.open {
+        display: flex;
+      }
+      .hamburger {
+        display: flex;
+      }
+      .header-actions .btn-neon {
+        display: none;
+      }
+      .split-left, .split-right {
+        flex: 1 1 100%;
+        padding: 2.5rem 1.5rem;
+      }
+      .metodo-item {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+      .metodo-num {
+        font-size: 3.2rem;
+        min-width: auto;
+      }
+      .hero h1 {
+        font-size: clamp(2.2rem, 10vw, 3.8rem);
+      }
+    }
+    @media (max-width: 580px) {
+      .header-inner {
+        flex-wrap: wrap;
+      }
+      .header-actions .btn-neon-whatsapp {
+        font-size: 0.75rem;
+        padding: 0.4rem 1rem;
+      }
+      .logo {
+        font-size: 1.3rem;
+      }
+      .btn-hero {
+        padding: 0.9rem 2rem;
+        font-size: 1rem;
+      }
+      .footer-cta h2 {
+        font-size: 2.4rem;
+      }
+      .btn-pulse {
+        font-size: 1.2rem;
+        padding: 0.9rem 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="container header-inner">
+    <div class="logo">DUO<span>CLASS</span></div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#diferencial">Diferencial</a></li>
+      <li><a href="#duo">Conoce a tu Duo</a></li>
+      <li><a href="#metodologia">Metodología</a></li>
+    </ul>
+    <div class="header-actions">
+      <button class="btn-neon" id="whatsappHeaderBtn">Hablar con un Profesor</button>
+      <button class="btn-neon-whatsapp" id="whatsappHeaderBtn2">WhatsApp</button>
+      <button class="hamburger" id="hamburgerBtn" aria-label="Menú">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <div class="container hero-grid">
+      <h1>Lógica sobre memoria.<br><span class="highlight">Confianza sobre estrés.</span></h1>
+      <p>La ingeniería detrás de tus notas. Matemáticas, Física y Química enseñadas por ingenieros de élite de la Pontificia Universidad Javeriana y el Imperial College London.</p>
+      <div class="btn-group">
+        <button class="btn-hero" id="heroDiagnostico">Agendar diagnóstico gratis ↗</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- MARQUEE -->
+  <div class="marquee-wrap">
+    <div class="marquee-track" id="marqueeTrack">
+      <span>+15 Años de Experiencia</span>
+      <span>100% Bilingüe (EN/ES)</span>
+      <span>Grados con Honores</span>
+      <span>Profesores Universitarios</span>
+      <span>Ciencias Exactas</span>
+      <span>+15 Años de Experiencia</span>
+      <span>100% Bilingüe (EN/ES)</span>
+      <span>Grados con Honores</span>
+      <span>Profesores Universitarios</span>
+      <span>Ciencias Exactas</span>
+    </div>
+  </div>
+
+  <!-- DIFERENCIAL -->
+  <section id="diferencial" class="bg-cream fade-section">
+    <div class="container">
+      <div class="diferencial-grid">
+        <div class="diferencial-item">
+          <h3>Enseñamos el <span class="accent">'por qué'</span>, no solo el 'cómo'.</h3>
+          <p>Olvídate de memorizar fórmulas sin sentido. Como ingenieros, conectamos los números con el mundo real. Cuando le ves la lógica, la fórmula nunca se olvida.</p>
+        </div>
+        <div class="diferencial-item">
+          <h3>Tú eres el <span class="accent">protagonista</span>.</h3>
+          <p>Nuestras clases no son un monólogo (50/50). Diseñamos un entorno donde tú hablas, analizas y resuelves. Nosotros guiamos tu razonamiento.</p>
+        </div>
+        <div class="diferencial-item">
+          <h3>Ingeniería inversa al <span class="accent">estrés</span>.</h3>
+          <p>El pánico bloquea la mente. Aplicamos estrategias probadas para fragmentar problemas gigantes y cambiar el 'no soy capaz' por 'lo resolveré paso a paso'.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SPLIT DUO -->
+  <section id="duo" class="split-section fade-section">
+    <div class="split-left">
+      <h2 class="split-title">Pensamiento <br>Analítico</h2>
+      <ul class="split-vinetas">
+        <li>Ingeniera Industrial</li>
+        <li>Máster en Analytics (Imperial College London)</li>
+        <li>Experta en estadística, inglés y manejo de ansiedad matemática.</li>
+      </ul>
+    </div>
+    <div class="split-right">
+      <h2 class="split-title">Estructura y <br>Lógica</h2>
+      <ul class="split-vinetas">
+        <li>Ingeniero Civil</li>
+        <li>Máster en Geotecnia (PUJ)</li>
+        <li>Profesor Universitario</li>
+        <li>Más de 15 años simplificando el cálculo y la física.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- METODOLOGÍA -->
+  <section id="metodologia" class="bg-dark fade-section">
+    <div class="container">
+      <h2 class="section-title" style="color:#00E676;">Metodología</h2>
+      <div class="metodo-list">
+        <div class="metodo-item">
+          <div class="metodo-num">1</div>
+          <div class="metodo-content">
+            <h4>Liberación Gradual</h4>
+            <p>Primero miras, luego dominas. Primero resolvemos nosotros mostrando la lógica, luego lo hacemos juntos, y finalmente tomas el control total.</p>
+          </div>
+        </div>
+        <div class="metodo-item">
+          <div class="metodo-num">2</div>
+          <div class="metodo-content">
+            <h4>Micro-Fragmentación</h4>
+            <p>Escondemos la montaña. Te enseñamos a tapar el ruido y enfocarte únicamente en el siguiente paso lógico. Pequeñas victorias destruyen la ansiedad.</p>
+          </div>
+        </div>
+        <div class="metodo-item">
+          <div class="metodo-num">3</div>
+          <div class="metodo-content">
+            <h4>Preguntas de Rescate</h4>
+            <p>Desbloqueo en tiempo real. Si te quedas en blanco, reiniciamos tu cerebro lógico con preguntas de bajo riesgo que reactivan tu análisis.</p>
+          </div>
+        </div>
+        <div class="metodo-item">
+          <div class="metodo-num">4</div>
+          <div class="metodo-content">
+            <h4>Auditoría de Errores</h4>
+            <p>Celebramos el error inteligente. Un signo mal puesto es un fallo mecánico. Te enseñamos a auditar tu proceso y arreglarlo sin frustración.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER CTA -->
+  <footer class="footer-cta fade-section">
+    <h2>El pánico a los números es real.<br>Nuestro método para vencerlo, también.</h2>
+    <p>No estudies más. Estudia mejor. Escríbenos directamente y diseñemos un plan a tu medida.</p>
+    <button class="btn-pulse" id="whatsappFooterBtn">Empezar por WhatsApp</button>
+    <div class="copyright">© 2026 Duo Class. Todos los derechos reservados.</div>
+  </footer>
+
+</main>
+
+<script>
+  (function() {
+    // WhatsApp simulation
+    function simularWhatsApp() {
+      alert('🔹 WhatsApp: +57 300 123 4567 (simulación)');
+    }
+    document.getElementById('whatsappHeaderBtn').addEventListener('click', simularWhatsApp);
+    document.getElementById('whatsappHeaderBtn2').addEventListener('click', simularWhatsApp);
+    document.getElementById('heroDiagnostico').addEventListener('click', function() {
+      alert('📅 Agenda tu diagnóstico gratis (simulación)');
+    });
+    document.getElementById('whatsappFooterBtn').addEventListener('click', simularWhatsApp);
+
+    // Hamburger
+    const hamburger = document.getElementById('hamburgerBtn');
+    const navLinks = document.getElementById('navLinks');
+    hamburger.addEventListener('click', function(e) {
+      e.stopPropagation();
+      navLinks.classList.toggle('open');
+    });
+    document.addEventListener('click', function(e) {
+      if (!navLinks.contains(e.target) && !hamburger.contains(e.target)) {
+        navLinks.classList.remove('open');
+      }
+    });
+
+    // IntersectionObserver Fade
+    const fadeEls = document.querySelectorAll('.fade-section');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+    fadeEls.forEach(el => observer.observe(el));
+
+    // Anchor links smooth (ya con scroll-behavior)
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        const targetId = this.getAttribute('href');
+        if (targetId === '#') return;
+        const target = document.querySelector(targetId);
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          // cierra menú móvil
+          navLinks.classList.remove('open');
+        }
+      });
+    });
+
+  })();
+</script>
+</body>
+</html>
