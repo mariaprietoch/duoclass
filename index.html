@@ -4,11 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Duo Class · Mentoría interactiva</title>
-  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800;900&family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700&display=swap" rel="stylesheet" />
-  <!-- Font Awesome 6 (gratis) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
   <style>
     /* RESET & BASE */
@@ -28,7 +26,6 @@
       font-weight: 400;
       line-height: 1.5;
       overflow-x: hidden;
-      /* Cursor del sistema siempre visible */
       cursor: default;
     }
     h1, h2, h3, .giant-text {
@@ -42,7 +39,7 @@
       padding: 0 1.8rem;
     }
 
-    /* CUSTOM CURSOR (solo aura decorativa) */
+    /* CUSTOM CURSOR (Aura decorativa que no bloquea el puntero real) */
     .custom-cursor {
       position: fixed;
       width: 28px;
@@ -65,11 +62,9 @@
       box-shadow: 0 0 40px #00e67666;
     }
 
-    /* Ocultar cursor personalizado en móviles (táctiles) */
     @media (hover: none) and (pointer: coarse), (max-width: 900px) {
-      .custom-cursor {
-        display: none !important;
-      }
+      .custom-cursor { display: none !important; }
+      body { cursor: default !important; }
     }
 
     /* PARALLAX FLOATING SYMBOLS */
@@ -116,14 +111,10 @@
       color: white;
       letter-spacing: -0.03em;
     }
-    .logo span {
-      color: #00E676;
-    }
+    .logo span { color: #00E676; }
     .nav-links {
       display: flex;
       gap: 2.4rem;
-      font-weight: 500;
-      font-size: 0.95rem;
       list-style: none;
     }
     .nav-links a {
@@ -145,12 +136,9 @@
       background: #00E676;
       transition: width 0.3s ease;
     }
-    .nav-links a:hover {
-      color: #00E676;
-    }
-    .nav-links a:hover::after {
-      width: 100%;
-    }
+    .nav-links a:hover { color: #00E676; }
+    .nav-links a:hover::after { width: 100%; }
+    
     .header-actions {
       display: flex;
       align-items: center;
@@ -211,11 +199,11 @@
       transition: 0.2s;
     }
 
-    /* HERO CAROUSEL (full viewport) */
+    /* HERO CAROUSEL */
     .hero-carousel {
       position: relative;
       height: 100vh;
-      min-height: 600px;
+      min-height: 650px;
       overflow: hidden;
       background: #0A1128;
     }
@@ -227,15 +215,12 @@
       display: flex;
       align-items: center;
       padding: 0 2rem;
-      background-size: cover;
-      background-position: center;
     }
     .carousel-slide::before {
       content: '';
       position: absolute;
       inset: 0;
-      background: rgba(10, 17, 40, 0.6);
-      backdrop-filter: blur(2px);
+      background: radial-gradient(circle at 20% 30%, rgba(20, 35, 75, 0.6) 0%, rgba(10, 17, 40, 0.95) 100%);
     }
     .carousel-slide.active {
       opacity: 1;
@@ -244,7 +229,7 @@
     .slide-content {
       position: relative;
       z-index: 3;
-      max-width: 800px;
+      max-width: 900px;
       transform: translateY(30px);
       opacity: 0;
       transition: transform 0.9s ease, opacity 0.9s ease;
@@ -253,22 +238,55 @@
       transform: translateY(0);
       opacity: 1;
     }
+    
+    /* MEJORAS TIPOGRÁFICAS HERO */
     .slide-content h1 {
-      font-size: clamp(2.8rem, 10vw, 5.2rem);
+      font-size: clamp(2.5rem, 7vw, 4.8rem);
       font-weight: 900;
-      line-height: 1.05;
-      margin-bottom: 0.8rem;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
       color: white;
+      text-shadow: 0 4px 20px rgba(0,0,0,0.4);
     }
-    .slide-content h1 .highlight {
+    .slide-content h1 .highlight { color: #00E676; }
+    
+    /* Efecto dinámico para el título de Ansiedad */
+    .title-dynamic .small-title {
+      font-size: 0.45em;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      display: block;
+      color: #b0c4de;
+      margin-bottom: -5px;
+    }
+    .title-dynamic .arrow-icon {
       color: #00E676;
+      font-weight: 400;
+      margin: 0 10px;
+      display: inline-block;
     }
-    .slide-content p {
-      font-size: 1.25rem;
-      max-width: 650px;
+
+    /* TEXTO ESTRUCTURADO EN RENGLES Y BOLD */
+    .scannable-text {
+      font-size: clamp(1.1rem, 2vw, 1.35rem);
       color: #d0dcee;
-      line-height: 1.6;
+      line-height: 1.7;
     }
+    .text-line {
+      display: block;
+      margin-bottom: 0.8rem;
+    }
+    .text-line i {
+      color: #00E676;
+      margin-right: 10px;
+      font-size: 1.1rem;
+    }
+    .text-line strong {
+      color: white;
+      font-weight: 700;
+    }
+
     .carousel-controls {
       position: absolute;
       bottom: 2.5rem;
@@ -326,7 +344,7 @@
 
     /* SECCIONES */
     section {
-      padding: 5rem 0;
+      padding: 6rem 0;
       position: relative;
       z-index: 2;
     }
@@ -343,15 +361,14 @@
       font-weight: 800;
       letter-spacing: -0.02em;
       line-height: 1.1;
-      margin-bottom: 2rem;
+      margin-bottom: 2.5rem;
     }
 
-    /* ESENCIA: HOVER REVEAL CARDS (glassmorphism) */
+    /* ESENCIA: BULLETS EN LUGAR DE TEXTO CORRIDO */
     .esencia-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 2.5rem;
-      margin-top: 1.5rem;
     }
     .esencia-card {
       background: rgba(255, 255, 255, 0.04);
@@ -359,91 +376,77 @@
       -webkit-backdrop-filter: blur(8px);
       border: 1px solid rgba(255, 255, 255, 0.06);
       border-radius: 28px;
-      padding: 2.5rem 2rem;
+      padding: 2.5rem 2.2rem;
       transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
       cursor: default;
-      min-height: 220px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.15);
     }
     .esencia-card .card-icon {
       font-size: 2.8rem;
       color: #00E676;
-      margin-bottom: 0.8rem;
+      margin-bottom: 1rem;
       transition: transform 0.4s;
     }
     .esencia-card h3 {
-      font-size: 1.6rem;
-      font-weight: 700;
-      margin-bottom: 0.2rem;
-      transition: color 0.3s;
+      font-size: 1.55rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+      line-height: 1.2;
     }
     .esencia-card .card-reveal {
       max-height: 0;
       overflow: hidden;
       opacity: 0;
-      transition: max-height 0.6s ease, opacity 0.5s ease, margin 0.3s;
-      margin-top: 0;
-      font-size: 1rem;
+      transition: max-height 0.6s ease, opacity 0.5s ease;
+      font-size: 0.98rem;
       line-height: 1.6;
-      color: #d0dcee;
+    }
+    /* Estructura interna de viñetas limpias */
+    .reveal-bullet {
+      display: block;
+      margin-bottom: 0.6rem;
+      position: relative;
+      padding-left: 15px;
+    }
+    .reveal-bullet::before {
+      content: "•";
+      color: #00E676;
+      position: absolute;
+      left: 0;
+      font-weight: bold;
     }
     .esencia-card:hover {
-      transform: translateY(-8px) scale(1.01);
-      background: rgba(255, 255, 255, 0.08);
+      transform: translateY(-8px);
       border-color: rgba(0, 230, 118, 0.3);
-      box-shadow: 0 16px 48px rgba(0, 230, 118, 0.1);
+      box-shadow: 0 16px 48px rgba(0, 230, 118, 0.12);
     }
     .esencia-card:hover .card-reveal {
-      max-height: 200px;
+      max-height: 300px;
       opacity: 1;
-      margin-top: 0.8rem;
     }
-    .esencia-card:hover .card-icon {
-      transform: rotate(8deg) scale(1.05);
-    }
-    .esencia-card.bg-cream .card-reveal {
-      color: #1f2a3f;
-    }
+    .esencia-card:hover .card-icon { transform: scale(1.08); }
+    
     .esencia-card.bg-cream {
-      background: rgba(244, 244, 249, 0.6);
-      backdrop-filter: blur(8px);
+      background: rgba(255, 255, 255, 0.85);
       border: 1px solid rgba(10, 17, 40, 0.06);
     }
-    .esencia-card.bg-cream:hover {
-      background: rgba(244, 244, 249, 0.85);
-    }
+    .esencia-card.bg-cream .reveal-bullet { color: #2e3d52; }
+    .esencia-card.bg-cream .reveal-bullet strong { color: #0A1128; }
 
-    /* ====== CORRECCIÓN MÓVIL: tarjetas esencia siempre abiertas ====== */
+    /* REGLAS MÓVIL: Siempre abierto */
     @media (max-width: 900px) {
       .esencia-card .card-reveal {
         max-height: 500px !important;
         opacity: 1 !important;
-        margin-top: 0.8rem !important;
         overflow: visible !important;
       }
-      .esencia-card {
-        min-height: auto !important;
-        padding: 2rem 1.5rem !important;
-      }
-      .esencia-card:hover {
-        transform: none !important;
-        background: rgba(255, 255, 255, 0.04) !important;
-        border-color: rgba(255, 255, 255, 0.06) !important;
-        box-shadow: 0 8px 32px rgba(0,0,0,0.2) !important;
-      }
-      .esencia-card.bg-cream:hover {
-        background: rgba(244, 244, 249, 0.6) !important;
-      }
+      .esencia-card:hover { transform: none !important; }
     }
 
     /* SPLIT SCROLL */
     .split-wrapper {
       display: flex;
       flex-wrap: wrap;
-      min-height: 500px;
     }
     .split-sticky {
       flex: 1 1 50%;
@@ -465,45 +468,44 @@
       gap: 3rem;
     }
     .split-scroll .profile-item {
-      background: rgba(255,255,255,0.03);
-      backdrop-filter: blur(4px);
+      background: rgba(255,255,255,0.02);
       border-radius: 24px;
-      padding: 2rem;
+      padding: 2.2rem;
       border-left: 4px solid #00E676;
-      transition: transform 0.3s, background 0.3s;
-      cursor: default;
+      transition: transform 0.3s;
     }
     .split-scroll .profile-item:hover {
-      background: rgba(255,255,255,0.06);
+      background: rgba(255,255,255,0.04);
       transform: translateX(8px);
     }
     .profile-item h3 {
-      font-size: 1.8rem;
+      font-size: 1.7rem;
       font-weight: 700;
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.8rem;
     }
     .profile-item ul {
       list-style: none;
       font-size: 1.05rem;
-      line-height: 2;
+      line-height: 1.8;
     }
+    .profile-item ul li { margin-bottom: 0.4rem; }
     .profile-item ul li::before {
       content: "▹ ";
       color: #00E676;
       font-weight: 800;
     }
 
-    /* ACORDEON METODOLOGIA */
+    /* ACORDEÓN METODOLOGÍA: FORMATEADO EN LÍNEAS SUELTAS Y ÍCONOS */
     .acordeon {
       display: flex;
       flex-direction: column;
-      gap: 0.8rem;
+      gap: 1rem;
       margin-top: 2rem;
     }
     .acordeon-item {
-      background: rgba(255,255,255,0.03);
+      background: rgba(255,255,255,0.02);
       border-radius: 20px;
-      border: 1px solid rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.04);
       overflow: hidden;
       transition: all 0.3s;
     }
@@ -511,17 +513,15 @@
       display: flex;
       align-items: center;
       gap: 1.2rem;
-      padding: 1.2rem 2rem;
+      padding: 1.5rem 2rem;
       cursor: pointer !important;
       font-weight: 700;
-      font-size: 1.3rem;
-      transition: background 0.3s;
+      font-size: 1.4rem;
+      user-select: none;
     }
-    .acordeon-header:hover {
-      background: rgba(0, 230, 118, 0.06);
-    }
+    .acordeon-header:hover { background: rgba(0, 230, 118, 0.04); }
     .acordeon-header .num {
-      font-size: 2.2rem;
+      font-size: 2.4rem;
       font-weight: 900;
       color: #00E676;
       min-width: 48px;
@@ -532,51 +532,47 @@
       transition: max-height 0.5s cubic-bezier(0.23, 1, 0.32, 1), padding 0.3s;
       padding: 0 2rem;
       color: #d0dcee;
+      font-size: 1.1rem;
+      line-height: 1.7;
+    }
+    .acordeon-body-line {
+      display: block;
+      margin-bottom: 0.6rem;
+    }
+    .acordeon-body-line i {
+      color: #00E676;
+      margin-right: 8px;
+      font-size: 0.95rem;
     }
     .acordeon-item.open .acordeon-body {
-      max-height: 200px;
-      padding: 0 2rem 1.8rem 2rem;
+      max-height: 250px;
+      padding: 0 2rem 2rem 5.2rem; /* Alineado perfecto debajo del título */
     }
-    .acordeon-item.open .acordeon-header {
-      background: rgba(0, 230, 118, 0.05);
+    .acordeon-item.open {
+      background: rgba(0, 230, 118, 0.02);
+      border-color: rgba(0, 230, 118, 0.15);
     }
 
     /* FOOTER CTA */
     .footer-cta {
       background: #0A1128;
-      padding: 5rem 1rem;
+      padding: 6rem 1rem;
       text-align: center;
       border-top: 1px solid #1f304a;
       position: relative;
-      overflow: hidden;
-    }
-    .footer-cta::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at 30% 50%, #00e67611, transparent 70%);
-      animation: breatheGlow 6s infinite alternate;
-    }
-    @keyframes breatheGlow {
-      0% { opacity: 0.3; transform: scale(1); }
-      100% { opacity: 0.8; transform: scale(1.1); }
     }
     .footer-cta h2 {
-      font-size: clamp(2.6rem, 8vw, 5rem);
+      font-size: clamp(2.3rem, 7vw, 4.5rem);
       font-weight: 900;
       max-width: 1000px;
-      margin: 0 auto 1.2rem;
+      margin: 0 auto 1.5rem;
       line-height: 1.1;
-      position: relative;
-      z-index: 2;
     }
     .footer-cta p {
-      font-size: 1.4rem;
+      font-size: 1.35rem;
       color: #bcc9e0;
       max-width: 660px;
       margin: 0 auto 2.5rem;
-      position: relative;
-      z-index: 2;
     }
     .btn-pulse {
       background: #00E676;
@@ -584,19 +580,12 @@
       padding: 1.2rem 3.5rem;
       border-radius: 80px;
       font-weight: 700;
-      font-size: 1.8rem;
+      font-size: 1.5rem;
       color: #0A1128;
       cursor: pointer !important;
       animation: pulse 2.2s infinite;
       font-family: 'Inter', sans-serif;
       box-shadow: 0 0 44px #00e67666;
-      transition: 0.2s;
-      position: relative;
-      z-index: 2;
-    }
-    .btn-pulse:hover {
-      background: #00c853;
-      transform: scale(1.02);
     }
     @keyframes pulse {
       0% { box-shadow: 0 0 0 0 #00e67666; }
@@ -604,23 +593,19 @@
       100% { box-shadow: 0 0 0 0 #00e67600; }
     }
     .trust-logos {
-      margin-top: 3rem;
+      margin-top: 3.5rem;
       display: flex;
       justify-content: center;
       gap: 3rem;
       font-weight: 600;
       color: #5f7396;
       font-size: 0.95rem;
-      position: relative;
-      z-index: 2;
       flex-wrap: wrap;
     }
     .copyright {
       margin-top: 2.5rem;
       color: #3a4b6a;
       font-size: 0.9rem;
-      position: relative;
-      z-index: 2;
     }
 
     /* RESPONSIVE */
@@ -632,62 +617,25 @@
         gap: 0.8rem;
         padding: 1.2rem 0;
         background: #0A1128;
-        border-top: 1px solid #1f304a;
       }
-      .nav-links.open {
-        display: flex;
-      }
-      .hamburger {
-        display: flex;
-      }
-      .header-actions .btn-neon {
-        display: none;
-      }
+      .nav-links.open { display: flex; }
+      .hamburger { display: flex; }
+      .header-actions .btn-neon { display: none; }
       .split-sticky, .split-scroll {
         flex: 1 1 100%;
         position: static;
         padding: 1.5rem;
       }
-      .split-scroll {
-        padding: 1.5rem;
-      }
-      .hero-cta {
-        bottom: 6rem;
-        right: 1.5rem;
-        left: 1.5rem;
-        text-align: center;
-      }
-      .carousel-slide {
-        padding: 0 1.5rem;
-      }
-    }
-    @media (max-width: 580px) {
-      .header-inner {
-        flex-wrap: wrap;
-      }
-      .header-actions .btn-neon-whatsapp {
-        font-size: 0.75rem;
-        padding: 0.4rem 1rem;
-      }
-      .logo {
-        font-size: 1.4rem;
-      }
-      .btn-hero {
-        padding: 0.9rem 2rem;
-        font-size: 1rem;
-      }
+      .acordeon-item.open .acordeon-body { padding: 0 1.5rem 1.5rem 1.5rem; }
     }
   </style>
 </head>
 <body>
 
-  <!-- FLOATING SYMBOLS (parallax) -->
   <div class="floating-symbols" id="floatingSymbols"></div>
 
-  <!-- CUSTOM CURSOR (solo aura decorativa) -->
   <div class="custom-cursor" id="customCursor"></div>
 
-  <!-- HEADER -->
   <header>
     <div class="container header-inner">
       <div class="logo">DUO<span>CLASS</span></div>
@@ -706,29 +654,48 @@
     </div>
   </header>
 
-  <!-- HERO CAROUSEL -->
   <section class="hero-carousel" id="nosotros">
-    <div class="carousel-slide active" style="background-image: linear-gradient(135deg, #0A1128 0%, #141f3a 100%);">
-      <div class="slide-content">
-        <h1>Menos frustración. <br><span class="highlight">Más confianza.</span></h1>
-        <p>En un aula con 30 estudiantes es fácil perder el ritmo. En nuestras sesiones 1 a 1, detectamos los vacíos exactos y avanzamos a la velocidad que tu hijo necesita.</p>
+    
+    <div class="carousel-slide active">
+      <div class="container slide-content">
+        <h1>Menos frustración.<br><span class="highlight">Más confianza.</span></h1>
+        <p class="scannable-text">
+          <span class="text-line"><i class="fas fa-users"></i> En un aula con 30 alumnos, <strong>es muy fácil perder el ritmo</strong>.</span>
+          <span class="text-line"><i class="fas fa-bullseye"></i> En nuestras <strong>sesiones personalizadas 1 a 1</strong> detectamos los vacíos exactos.</span>
+          <span class="text-line"><i class="fas fa-bolt"></i> Avanzamos sin afanes, a la velocidad que tu hijo realmente necesita.</span>
+        </p>
       </div>
     </div>
-    <div class="carousel-slide" style="background-image: linear-gradient(135deg, #0A1128 0%, #1a2a4a 100%);">
-      <div class="slide-content">
-        <h1>De la ansiedad a la <span class="highlight">seguridad.</span></h1>
-        <p>Sabemos que ver a tu hijo abrumado por los números es difícil. No necesitas un tutor tradicional; buscas mentores que le devuelvan la tranquilidad y la confianza en sí mismo.</p>
+    
+    <div class="carousel-slide">
+      <div class="container slide-content">
+        <h1 class="title-dynamic">
+          <span class="small-title">De la</span>
+          ansiedad <span class="arrow-icon">→</span> a la <span class="highlight">seguridad.</span>
+        </h1>
+        <p class="scannable-text">
+          <span class="text-line"><i class="fas fa-heart"></i> Sabemos que ver a tu hijo abrumado por los números <strong>es difícil para toda la familia</strong>.</span>
+          <span class="text-line"><i class="fas fa-shield-alt"></i> No necesitas un tutor tradicional; <strong>buscas mentores de confianza</strong>.</span>
+          <span class="text-line"><i class="fas fa-smile"></i> Alguien que le devuelva la tranquilidad, la sonrisa y la seguridad en sí mismo.</span>
+        </p>
       </div>
     </div>
-    <div class="carousel-slide" style="background-image: linear-gradient(135deg, #0A1128 0%, #16203a 100%);">
-      <div class="slide-content">
-        <h1>¿Refuerzo o <span class="highlight">desde cero?</span></h1>
-        <p>Ya sea para construir las bases desde cero, afianzar un tema complejo o prepararse estratégicamente para un examen final, diseñamos el camino exacto para lograrlo.</p>
+    
+    <div class="carousel-slide">
+      <div class="container slide-content">
+        <h1>¿Construir desde cero <br>o <span class="highlight">afianzar conocimientos?</span></h1>
+        <p class="scannable-text">
+          <span class="text-line"><i class="fas fa-seedling"></i> <strong>Desde cero:</strong> Diseñamos bases sólidas si siente que no entiende nada.</span>
+          <span class="text-line"><i class="fas fa-graduation-cap"></i> <strong>Refuerzo estratégico:</strong> Nos preparamos para un parcial o examen importante.</span>
+          <span class="text-line"><i class="fas fa-map-signs"></i> Sea cual sea el punto de partida, <strong>trazamos el camino exacto juntos</strong>.</span>
+        </p>
       </div>
     </div>
+
     <div class="hero-cta">
       <button class="btn-hero" id="heroWhatsapp">Conversemos por WhatsApp ↗</button>
     </div>
+    
     <div class="carousel-controls">
       <button class="carousel-dot active" data-index="0"></button>
       <button class="carousel-dot" data-index="1"></button>
@@ -736,32 +703,46 @@
     </div>
   </section>
 
-  <!-- ESENCIA (HOVER REVEAL) -->
-  <section id="esencia" class="bg-cream fade-section" style="padding: 4rem 0;">
+  <section id="esencia" class="bg-cream">
     <div class="container">
-      <h2 class="section-title" style="color: #0A1128;">Nuestra <span style="color:#00c853;">Esencia</span></h2>
+      <h2 class="section-title">Nuestra <span style="color:#00c853;">Esencia</span></h2>
       <div class="esencia-grid">
+        
         <div class="esencia-card bg-cream">
           <div class="card-icon"><i class="fas fa-brain"></i></div>
-          <h3>Buscamos que lo entienda, no que lo memorice.</h3>
-          <div class="card-reveal">Olvídate de las fórmulas aprendidas a la fuerza. Conectamos las matemáticas con la vida real. Cuando descubre el 'por qué', el miedo desaparece.</div>
+          <h3>Que lo entienda, no que lo memorice.</h3>
+          <div class="card-reveal">
+            <span class="reveal-bullet">Adiós a las fórmulas aprendidas a la fuerza.</span>
+            <span class="reveal-bullet">Conectamos la ciencia con la <strong>vida real</strong>.</span>
+            <span class="reveal-bullet">Al descubrir el <strong>"por qué"</strong>, el miedo se va.</span>
+          </div>
         </div>
+        
         <div class="esencia-card bg-cream">
           <div class="card-icon"><i class="fas fa-comments"></i></div>
           <h3>Aquí el protagonista es tu hijo.</h3>
-          <div class="card-reveal">Creamos un espacio seguro (50/50) donde tu hijo analiza, pregunta sin pena y resuelve a su propio ritmo. Nosotros guiamos su lógica.</div>
+          <div class="card-reveal">
+            <span class="reveal-bullet">Un espacio seguro y conversado <strong>(50% y 50%)</strong>.</span>
+            <span class="reveal-bullet">Puede preguntar mil veces <strong>sin ninguna pena</strong>.</span>
+            <span class="reveal-bullet">Nosotros solo guiamos; el éxito es suyo.</span>
+          </div>
         </div>
+        
         <div class="esencia-card bg-cream">
           <div class="card-icon"><i class="fas fa-mountain"></i></div>
           <h3>Cambiamos el estrés por un respiro.</h3>
-          <div class="card-reveal">Desarmamos los problemas gigantes en metas pequeñitas. Así, pasa del 'no soy capaz' a un 'puedo resolverlo paso a paso'.</div>
+          <div class="card-reveal">
+            <span class="reveal-bullet">Desarmamos problemas gigantes en <strong>metas diminutas</strong>.</span>
+            <span class="reveal-bullet">Evitamos que la mente se congele del susto.</span>
+            <span class="reveal-bullet">Pasa del "no soy capaz" al <strong>"puedo paso a paso"</strong>.</span>
+          </div>
         </div>
+
       </div>
     </div>
   </section>
 
-  <!-- SPLIT SCROLL: CONOCE A TU DUO -->
-  <section class="bg-dark fade-section" style="padding: 2rem 0 4rem;">
+  <section class="bg-dark">
     <div class="container">
       <h2 class="section-title" style="color:#00E676;">Conoce a tu <span style="color:white;">Duo</span></h2>
     </div>
@@ -793,33 +774,48 @@
     </div>
   </section>
 
-  <!-- METODOLOGÍA: ACORDEÓN -->
-  <section id="metodologia" class="bg-dark fade-section">
+  <section id="metodologia" class="bg-dark">
     <div class="container">
       <h2 class="section-title" style="color:#00E676;">Cómo los acompañamos</h2>
       <div class="acordeon">
+        
         <div class="acordeon-item open">
           <div class="acordeon-header"><span class="num">1</span> Compañeros de equipo</div>
-          <div class="acordeon-body">Nunca los lanzamos al vacío. Primero resolvemos nosotros mostrando cómo pensamos, luego lo hacemos juntos.</div>
+          <div class="acordeon-body">
+            <span class="acordeon-body-line"><i class="fas fa-eye"></i> <strong>Primero miramos:</strong> Nosotros resolvemos el ejercicio mostrando nuestra lógica en voz alta.</span>
+            <span class="acordeon-body-line"><i class="fas fa-handshake"></i> <strong>Luego construimos:</strong> Lo resolvemos juntos en la pantalla para ganar soltura.</span>
+          </div>
         </div>
+        
         <div class="acordeon-item">
           <div class="acordeon-header"><span class="num">2</span> Metas alcanzables</div>
-          <div class="acordeon-body">Escondemos la montaña. Ignoramos el ruido del problema y nos enfocamos solo en el siguiente paso.</div>
+          <div class="acordeon-body">
+            <span class="acordeon-body-line"><i class="fas fa-compress-alt"></i> <strong>Escondemos la montaña:</strong> Un problema largo abruma a cualquiera.</span>
+            <span class="acordeon-body-line"><i class="fas fa-check-circle"></i> <strong>Enfoque único:</strong> Tapamos el ruido y resolvemos estrictamente el siguiente paso lógico.</span>
+          </div>
         </div>
+        
         <div class="acordeon-item">
           <div class="acordeon-header"><span class="num">3</span> Preguntas de rescate</div>
-          <div class="acordeon-body">Espacio libre de presiones. Si se queda en blanco, reactivamos su lógica con preguntas tranquilas.</div>
+          <div class="acordeon-body">
+            <span class="acordeon-body-line"><i class="fas fa-wind"></i> <strong>Espacio sin presión:</strong> Si tu hijo se queda en blanco, jamás lo presionamos.</span>
+            <span class="acordeon-body-line"><i class="fas fa-lightbulb"></i> <strong>Reinicio lógico:</strong> Hacemos preguntas obvias y sencillas para reactivar su confianza y calmar el estrés.</span>
+          </div>
         </div>
+        
         <div class="acordeon-item">
           <div class="acordeon-header"><span class="num">4</span> El valor de intentar</div>
-          <div class="acordeon-body">Abrazamos el error. Equivocarse en un signo es parte del aprendizaje; les enseñamos a revisar su proceso como detectives.</div>
+          <div class="acordeon-body">
+            <span class="acordeon-body-line"><i class="fas fa-search"></i> <strong>Detectives de errores:</strong> Equivocarse en un signo no es un fracaso, es un daño mecánico.</span>
+            <span class="acordeon-body-line"><i class="fas fa-thumbs-up"></i> <strong>Auditoría amable:</strong> Le enseñamos a auditar su proceso con tranquilidad y celebrar el esfuerzo.</span>
+          </div>
         </div>
+
       </div>
     </div>
   </section>
 
-  <!-- FOOTER CTA -->
-  <footer class="footer-cta fade-section">
+  <footer class="footer-cta">
     <h2>El pánico a los números es real.<br>Nuestra dedicación para vencerlo, también.</h2>
     <p>Queremos que tu hijo vuelva a sonreír antes de un examen.</p>
     <button class="btn-pulse" id="whatsappFooterBtn">Escríbenos por WhatsApp</button>
@@ -831,24 +827,88 @@
   </footer>
 
   <script>
-    (function() {
-      // ----- CUSTOM CURSOR (aura decorativa) -----
+    document.addEventListener('DOMContentLoaded', () => {
+      
+      // ----- CUSTOM CURSOR (Aura decorativa) -----
       const cursor = document.getElementById('customCursor');
       if (cursor) {
         document.addEventListener('mousemove', (e) => {
           cursor.style.left = e.clientX + 'px';
           cursor.style.top = e.clientY + 'px';
         });
-        document.querySelectorAll('button, a, .acordeon-header, .esencia-card, .profile-item, .carousel-dot, .btn-hero, .btn-pulse, .btn-neon, .btn-neon-whatsapp, .hamburger').forEach(el => {
+        document.querySelectorAll('button, a, .acordeon-header, .esencia-card, .profile-item, .carousel-dot').forEach(el => {
           el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
           el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
         });
       }
 
-      // ----- FLOATING SYMBOLS (parallax) -----
+      // ----- FLOATING SYMBOLS (Parallax) -----
       const symbols = ['+', '−', '∞', '∫', '∑', 'π', '√', '±'];
       const container = document.getElementById('floatingSymbols');
       if (container) {
         for (let i = 0; i < 18; i++) {
           const span = document.createElement('span');
-          span.className =
+          span.className = 'symbol';
+          span.textContent = symbols[i % symbols.length];
+          span.style.left = Math.random() * 90 + '%';
+          span.style.top = Math.random() * 90 + '%';
+          span.style.fontSize = (1.2 + Math.random() * 2.2) + 'rem';
+          span.style.opacity = 0.06 + Math.random() * 0.1;
+          span.dataset.speed = 0.02 + Math.random() * 0.04;
+          container.appendChild(span);
+        }
+        window.addEventListener('scroll', () => {
+          const scrolled = window.scrollY;
+          document.querySelectorAll('.symbol').forEach((el) => {
+            const speed = parseFloat(el.dataset.speed);
+            const y = scrolled * speed * 0.6;
+            el.style.transform = `translateY(${y}px) rotate(${scrolled * 0.02}deg)`;
+          });
+        });
+      }
+
+      // ----- CAROUSEL DE BANNERS (Puntos y tiempo automático reparados) -----
+      const slides = document.querySelectorAll('.carousel-slide');
+      const dots = document.querySelectorAll('.carousel-dot');
+      let currentSlide = 0;
+      let slideInterval = setInterval(nextSlide, 6000);
+
+      function goToSlide(index) {
+        slides.forEach((slide, i) => slide.classList.toggle('active', i === index));
+        dots.forEach((dot, i) => dot.classList.toggle('active', i === index));
+        currentSlide = index;
+      }
+
+      function nextSlide() {
+        goToSlide((currentSlide + 1) % slides.length);
+      }
+
+      dots.forEach((dot, index) => {
+        dot.addEventListener('click', () => {
+          clearInterval(slideInterval);
+          goToSlide(index);
+          slideInterval = setInterval(nextSlide, 6000);
+        });
+      });
+
+      // ----- ACORDEÓN DE METODOLOGÍA (Clics reparados) -----
+      const acordeonHeaders = document.querySelectorAll('.acordeon-header');
+      acordeonHeaders.forEach(header => {
+        header.addEventListener('click', () => {
+          const item = header.parentElement;
+          item.classList.toggle('open');
+        });
+      });
+
+      // ----- MENÚ HAMBURGUESA -----
+      const hamburgerBtn = document.getElementById('hamburgerBtn');
+      const navLinks = document.getElementById('navLinks');
+      if (hamburgerBtn && navLinks) {
+        hamburgerBtn.addEventListener('click', () => {
+          navLinks.classList.toggle('open');
+        });
+      }
+    });
+  </script>
+</body>
+</html>
