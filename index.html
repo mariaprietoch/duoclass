@@ -28,7 +28,8 @@
       font-weight: 400;
       line-height: 1.5;
       overflow-x: hidden;
-      cursor: none;
+      /* Cursor del sistema siempre visible */
+      cursor: default;
     }
     h1, h2, h3, .giant-text {
       font-family: 'Space Grotesk', sans-serif;
@@ -41,7 +42,7 @@
       padding: 0 1.8rem;
     }
 
-    /* CUSTOM CURSOR */
+    /* CUSTOM CURSOR (solo aura decorativa) */
     .custom-cursor {
       position: fixed;
       width: 28px;
@@ -62,6 +63,13 @@
       background: rgba(0, 230, 118, 0.2);
       border-color: #00E676;
       box-shadow: 0 0 40px #00e67666;
+    }
+
+    /* Ocultar cursor personalizado en móviles (táctiles) */
+    @media (hover: none) and (pointer: coarse), (max-width: 900px) {
+      .custom-cursor {
+        display: none !important;
+      }
     }
 
     /* PARALLAX FLOATING SYMBOLS */
@@ -125,6 +133,7 @@
       position: relative;
       transition: color 0.3s;
       font-weight: 500;
+      cursor: pointer !important;
     }
     .nav-links a::after {
       content: '';
@@ -155,7 +164,7 @@
       border-radius: 60px;
       font-weight: 600;
       font-size: 0.9rem;
-      cursor: pointer;
+      cursor: pointer !important;
       transition: all 0.25s;
       font-family: 'Inter', sans-serif;
       background: rgba(0, 230, 118, 0.04);
@@ -176,7 +185,7 @@
       border-radius: 60px;
       font-weight: 700;
       font-size: 0.95rem;
-      cursor: pointer;
+      cursor: pointer !important;
       transition: all 0.25s;
       font-family: 'Inter', sans-serif;
       box-shadow: 0 0 16px #00e67655;
@@ -190,7 +199,7 @@
       display: none;
       flex-direction: column;
       gap: 5px;
-      cursor: pointer;
+      cursor: pointer !important;
       background: none;
       border: none;
     }
@@ -275,8 +284,9 @@
       border-radius: 50%;
       background: rgba(255,255,255,0.25);
       border: none;
-      cursor: pointer;
+      cursor: pointer !important;
       transition: all 0.3s;
+      z-index: 11;
     }
     .carousel-dot.active {
       background: #00E676;
@@ -297,7 +307,7 @@
       font-weight: 700;
       font-size: 1.2rem;
       color: #0A1128;
-      cursor: pointer;
+      cursor: pointer !important;
       transition: all 0.25s;
       box-shadow: 0 0 30px #00e67666;
       font-family: 'Inter', sans-serif;
@@ -406,6 +416,29 @@
       background: rgba(244, 244, 249, 0.85);
     }
 
+    /* ====== CORRECCIÓN MÓVIL: tarjetas esencia siempre abiertas ====== */
+    @media (max-width: 900px) {
+      .esencia-card .card-reveal {
+        max-height: 500px !important;
+        opacity: 1 !important;
+        margin-top: 0.8rem !important;
+        overflow: visible !important;
+      }
+      .esencia-card {
+        min-height: auto !important;
+        padding: 2rem 1.5rem !important;
+      }
+      .esencia-card:hover {
+        transform: none !important;
+        background: rgba(255, 255, 255, 0.04) !important;
+        border-color: rgba(255, 255, 255, 0.06) !important;
+        box-shadow: 0 8px 32px rgba(0,0,0,0.2) !important;
+      }
+      .esencia-card.bg-cream:hover {
+        background: rgba(244, 244, 249, 0.6) !important;
+      }
+    }
+
     /* SPLIT SCROLL */
     .split-wrapper {
       display: flex;
@@ -438,6 +471,7 @@
       padding: 2rem;
       border-left: 4px solid #00E676;
       transition: transform 0.3s, background 0.3s;
+      cursor: default;
     }
     .split-scroll .profile-item:hover {
       background: rgba(255,255,255,0.06);
@@ -478,7 +512,7 @@
       align-items: center;
       gap: 1.2rem;
       padding: 1.2rem 2rem;
-      cursor: pointer;
+      cursor: pointer !important;
       font-weight: 700;
       font-size: 1.3rem;
       transition: background 0.3s;
@@ -552,7 +586,7 @@
       font-weight: 700;
       font-size: 1.8rem;
       color: #0A1128;
-      cursor: pointer;
+      cursor: pointer !important;
       animation: pulse 2.2s infinite;
       font-family: 'Inter', sans-serif;
       box-shadow: 0 0 44px #00e67666;
@@ -650,7 +684,7 @@
   <!-- FLOATING SYMBOLS (parallax) -->
   <div class="floating-symbols" id="floatingSymbols"></div>
 
-  <!-- CUSTOM CURSOR -->
+  <!-- CUSTOM CURSOR (solo aura decorativa) -->
   <div class="custom-cursor" id="customCursor"></div>
 
   <!-- HEADER -->
@@ -798,59 +832,23 @@
 
   <script>
     (function() {
-      // ----- CUSTOM CURSOR -----
+      // ----- CUSTOM CURSOR (aura decorativa) -----
       const cursor = document.getElementById('customCursor');
-      document.addEventListener('mousemove', (e) => {
-        cursor.style.left = e.clientX + 'px';
-        cursor.style.top = e.clientY + 'px';
-      });
-      document.querySelectorAll('button, a, .acordeon-header, .esencia-card, .profile-item').forEach(el => {
-        el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
-        el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
-      });
+      if (cursor) {
+        document.addEventListener('mousemove', (e) => {
+          cursor.style.left = e.clientX + 'px';
+          cursor.style.top = e.clientY + 'px';
+        });
+        document.querySelectorAll('button, a, .acordeon-header, .esencia-card, .profile-item, .carousel-dot, .btn-hero, .btn-pulse, .btn-neon, .btn-neon-whatsapp, .hamburger').forEach(el => {
+          el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+          el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+        });
+      }
 
       // ----- FLOATING SYMBOLS (parallax) -----
       const symbols = ['+', '−', '∞', '∫', '∑', 'π', '√', '±'];
       const container = document.getElementById('floatingSymbols');
-      for (let i = 0; i < 18; i++) {
-        const span = document.createElement('span');
-        span.className = 'symbol';
-        span.textContent = symbols[i % symbols.length];
-        span.style.left = Math.random() * 90 + '%';
-        span.style.top = Math.random() * 90 + '%';
-        span.style.fontSize = (1.2 + Math.random() * 2.2) + 'rem';
-        span.style.opacity = 0.06 + Math.random() * 0.1;
-        span.dataset.speed = 0.02 + Math.random() * 0.04;
-        container.appendChild(span);
-      }
-      window.addEventListener('scroll', () => {
-        const scrolled = window.scrollY;
-        document.querySelectorAll('.symbol').forEach((el, i) => {
-          const speed = parseFloat(el.dataset.speed);
-          const y = scrolled * speed * 0.6;
-          el.style.transform = `translateY(${y}px) rotate(${scrolled * 0.02}deg)`;
-        });
-      });
-
-      // ----- CAROUSEL -----
-      const slides = document.querySelectorAll('.carousel-slide');
-      const dots = document.querySelectorAll('.carousel-dot');
-      let current = 0;
-      let interval = setInterval(nextSlide, 6000);
-
-      function goToSlide(index) {
-        slides.forEach((s, i) => s.classList.toggle('active', i === index));
-        dots.forEach((d, i) => d.classList.toggle('active', i === index));
-        current = index;
-      }
-      function nextSlide() { goToSlide((current + 1) % slides.length); }
-      dots.forEach((dot, i) => {
-        dot.addEventListener('click', () => {
-          clearInterval(interval);
-          goToSlide(i);
-          interval = setInterval(nextSlide, 6000);
-        });
-      });
-
-      // ----- ACORDEON -----
-      document
+      if (container) {
+        for (let i = 0; i < 18; i++) {
+          const span = document.createElement('span');
+          span.className =
