@@ -3,630 +3,294 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Duo Class · Mentoría interactiva</title>
+  <title>Duo Class · Mentoría e Ingeniería Académica</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800;900&family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800;900&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
   <style>
+    /* VARIABLES DE COLOR */
+    :root {
+      --bg-cream: #fdfbf7;
+      --blue-dark: #1e3a8a;
+      --mint-green: #a7f3d0;
+      --violet-soft: #ddd6fe;
+      --text-dark: #0f1d45;
+    }
+
     /* RESET & BASE */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    html {
-      scroll-behavior: smooth;
-      scroll-padding-top: 80px;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 80px; }
     body {
-      background-color: #0A1128;
-      color: #F4F4F9;
-      font-family: 'Inter', sans-serif;
-      font-weight: 400;
-      line-height: 1.5;
-      overflow-x: hidden;
-      cursor: default;
+      background-color: var(--bg-cream); color: var(--text-dark);
+      font-family: 'Inter', sans-serif; line-height: 1.6; overflow-x: hidden;
     }
-    h1, h2, h3, .giant-text {
-      font-family: 'Space Grotesk', sans-serif;
-      font-weight: 800;
-      letter-spacing: -0.02em;
-    }
-    .container {
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: 0 1.8rem;
-    }
-
-    /* CUSTOM CURSOR (Aura decorativa que no bloquea el puntero real) */
-    .custom-cursor {
-      position: fixed;
-      width: 28px;
-      height: 28px;
-      border: 2px solid #00E676;
-      border-radius: 50%;
-      pointer-events: none;
-      z-index: 9999;
-      transform: translate(-50%, -50%);
-      transition: width 0.2s, height 0.2s, background 0.2s, border-color 0.2s;
-      mix-blend-mode: difference;
-      background: rgba(0, 230, 118, 0.08);
-      box-shadow: 0 0 20px #00e67633;
-    }
-    .custom-cursor.hover {
-      width: 44px;
-      height: 44px;
-      background: rgba(0, 230, 118, 0.2);
-      border-color: #00E676;
-      box-shadow: 0 0 40px #00e67666;
-    }
-
-    @media (hover: none) and (pointer: coarse), (max-width: 900px) {
-      .custom-cursor { display: none !important; }
-      body { cursor: default !important; }
-    }
+    h1, h2, h3, .giant-text { font-family: 'Space Grotesk', sans-serif; font-weight: 800; letter-spacing: -0.02em; }
+    .container { max-width: 1280px; margin: 0 auto; padding: 0 1.8rem; }
 
     /* PARALLAX FLOATING SYMBOLS */
     .floating-symbols {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 0;
-      overflow: hidden;
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      pointer-events: none; z-index: 0; overflow: hidden;
     }
     .symbol {
-      position: absolute;
-      font-size: 2.2rem;
-      color: #00e67622;
-      font-weight: 300;
-      user-select: none;
-      transition: transform 0.1s;
+      position: absolute; font-size: 2.2rem; color: rgba(30, 58, 138, 0.05);
+      font-weight: 300; user-select: none; transition: transform 0.1s;
     }
 
-    /* HEADER GLASSMORPHISM */
+    /* HEADER */
     header {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: rgba(10, 17, 40, 0.6);
-      backdrop-filter: blur(14px) saturate(180%);
-      -webkit-backdrop-filter: blur(14px) saturate(180%);
-      border-bottom: 1px solid rgba(0, 230, 118, 0.15);
-      padding: 0.7rem 0;
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(253, 251, 247, 0.85); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(30, 58, 138, 0.1); padding: 0.8rem 0;
     }
-    .header-inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-    }
-    .logo {
-      font-family: 'Space Grotesk', sans-serif;
-      font-weight: 900;
-      font-size: 1.8rem;
-      color: white;
-      letter-spacing: -0.03em;
-    }
-    .logo span { color: #00E676; }
-    .nav-links {
-      display: flex;
-      gap: 2.4rem;
-      list-style: none;
-    }
-    .nav-links a {
-      color: #e0e7f0;
-      text-decoration: none;
-      padding-bottom: 4px;
-      position: relative;
-      transition: color 0.3s;
-      font-weight: 500;
-      cursor: pointer !important;
-    }
+    .header-inner { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; }
+    .logo { font-family: 'Space Grotesk', sans-serif; font-weight: 900; font-size: 1.8rem; color: var(--blue-dark); }
+    .logo span { color: #10b981; }
+    
+    .nav-links { display: flex; gap: 2.4rem; list-style: none; }
+    .nav-links a { color: var(--text-dark); text-decoration: none; padding-bottom: 4px; position: relative; font-weight: 600; cursor: pointer;}
     .nav-links a::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 0%;
-      height: 2px;
-      background: #00E676;
-      transition: width 0.3s ease;
+      content: ''; position: absolute; bottom: 0; left: 0; width: 0%; height: 3px;
+      background: var(--violet-soft); transition: 0.3s; border-radius: 2px;
     }
-    .nav-links a:hover { color: #00E676; }
     .nav-links a:hover::after { width: 100%; }
     
-    .header-actions {
-      display: flex;
-      align-items: center;
-      gap: 1.2rem;
-    }
+    .header-actions { display: flex; align-items: center; gap: 1.2rem; }
     .btn-neon {
-      background: transparent;
-      border: 2px solid #00E676;
-      color: #00E676;
-      padding: 0.5rem 1.4rem;
-      border-radius: 60px;
-      font-weight: 600;
-      font-size: 0.9rem;
-      cursor: pointer !important;
-      transition: all 0.25s;
-      font-family: 'Inter', sans-serif;
-      background: rgba(0, 230, 118, 0.04);
-      letter-spacing: 0.3px;
-      white-space: nowrap;
+      background: transparent; border: 2px solid var(--blue-dark); color: var(--blue-dark);
+      padding: 0.5rem 1.4rem; border-radius: 60px; font-weight: 700; font-size: 0.9rem;
+      cursor: pointer; transition: 0.3s; font-family: 'Inter', sans-serif;
     }
-    .btn-neon:hover {
-      background: #00E676;
-      color: #0A1128;
-      box-shadow: 0 0 24px #00e67655;
-      transform: scale(1.02);
-    }
+    .btn-neon:hover { background: var(--violet-soft); border-color: var(--violet-soft); transform: scale(1.02); }
+    
     .btn-neon-whatsapp {
-      background: #00E676;
-      border: none;
-      color: #0A1128;
-      padding: 0.6rem 1.6rem;
-      border-radius: 60px;
-      font-weight: 700;
-      font-size: 0.95rem;
-      cursor: pointer !important;
-      transition: all 0.25s;
-      font-family: 'Inter', sans-serif;
-      box-shadow: 0 0 16px #00e67655;
+      background: var(--mint-green); border: none; color: var(--blue-dark); padding: 0.6rem 1.6rem;
+      border-radius: 60px; font-weight: 800; font-size: 0.95rem; cursor: pointer; transition: 0.3s;
+      box-shadow: 0 4px 15px rgba(167, 243, 208, 0.6);
     }
-    .btn-neon-whatsapp:hover {
-      background: #00c853;
-      transform: scale(1.02);
-      box-shadow: 0 0 28px #00e67699;
-    }
-    .hamburger {
-      display: none;
-      flex-direction: column;
-      gap: 5px;
-      cursor: pointer !important;
-      background: none;
-      border: none;
-    }
-    .hamburger span {
-      width: 28px;
-      height: 3px;
-      background: #f4f4f9;
-      border-radius: 4px;
-      transition: 0.2s;
-    }
+    .btn-neon-whatsapp:hover { background: var(--violet-soft); color: var(--blue-dark); transform: scale(1.02); box-shadow: 0 4px 15px rgba(221, 214, 254, 0.8); }
+    
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; }
+    .hamburger span { width: 28px; height: 3px; background: var(--blue-dark); border-radius: 4px; transition: 0.2s; }
 
     /* HERO CAROUSEL */
-    .hero-carousel {
-      position: relative;
-      height: 100vh;
-      min-height: 650px;
-      overflow: hidden;
-      background: #0A1128;
-    }
+    .hero-carousel { position: relative; height: 90vh; min-height: 600px; overflow: hidden; background: var(--blue-dark); margin: 1rem 1.8rem; border-radius: 40px; }
     .carousel-slide {
-      position: absolute;
-      inset: 0;
-      opacity: 0;
-      transition: opacity 1.2s ease-in-out;
-      display: flex;
-      align-items: center;
-      padding: 0 2rem;
+      position: absolute; inset: 0; opacity: 0; transition: opacity 1.2s ease-in-out; display: flex; align-items: center; padding: 0 4rem;
+      background-size: cover; background-position: center; background-repeat: no-repeat;
     }
-    .carousel-slide::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at 20% 30%, rgba(20, 35, 75, 0.6) 0%, rgba(10, 17, 40, 0.95) 100%);
+    /* Capa oscura superpuesta a la foto para asegurar que el texto sea 100% legible */
+    .carousel-slide::before { 
+      content: ''; position: absolute; inset: 0; 
+      background: linear-gradient(135deg, rgba(15, 29, 69, 0.9) 0%, rgba(30, 58, 138, 0.6) 100%); 
+      z-index: 1; 
     }
-    .carousel-slide.active {
-      opacity: 1;
-      z-index: 2;
-    }
-    .slide-content {
-      position: relative;
-      z-index: 3;
-      max-width: 900px;
-      transform: translateY(30px);
-      opacity: 0;
-      transition: transform 0.9s ease, opacity 0.9s ease;
-    }
-    .carousel-slide.active .slide-content {
-      transform: translateY(0);
-      opacity: 1;
-    }
+    .carousel-slide.active { opacity: 1; z-index: 2; }
+    .slide-content { position: relative; z-index: 3; max-width: 900px; transform: translateY(30px); opacity: 0; transition: transform 0.9s ease, opacity 0.9s ease; }
+    .carousel-slide.active .slide-content { transform: translateY(0); opacity: 1; }
+    .slide-content h1 { font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 900; line-height: 1.1; margin-bottom: 1.5rem; color: var(--bg-cream); }
+    .slide-content h1 .highlight-mint { color: var(--mint-green); }
+    .slide-content h1 .highlight-violet { color: var(--violet-soft); }
     
-    /* MEJORAS TIPOGRÁFICAS HERO */
-    .slide-content h1 {
-      font-size: clamp(2.5rem, 7vw, 4.8rem);
-      font-weight: 900;
-      line-height: 1.1;
-      margin-bottom: 1.5rem;
-      color: white;
-      text-shadow: 0 4px 20px rgba(0,0,0,0.4);
-    }
-    .slide-content h1 .highlight { color: #00E676; }
+    .title-dynamic .small-title { font-size: 0.45em; font-weight: 500; text-transform: uppercase; letter-spacing: 2px; display: block; color: var(--violet-soft); margin-bottom: 0px; }
+    .title-dynamic .arrow-icon { color: var(--mint-green); margin: 0 10px; display: inline-block; }
+
+    .scannable-text { font-size: clamp(1.1rem, 2vw, 1.25rem); color: #e2e8f0; line-height: 1.7; }
+    .text-line { display: block; margin-bottom: 0.8rem; }
+    .text-line i { color: var(--mint-green); margin-right: 12px; font-size: 1.2em; }
+    .text-line strong { color: var(--bg-cream); font-weight: 700; }
+
+    .carousel-controls { position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%); z-index: 10; display: flex; gap: 1rem; }
+    .carousel-dot { width: 12px; height: 12px; border-radius: 50%; background: rgba(253, 251, 247, 0.4); border: none; cursor: pointer; transition: 0.3s; z-index: 11; }
+    .carousel-dot.active { background: var(--mint-green); transform: scale(1.3); }
     
-    /* Efecto dinámico para el título de Ansiedad */
-    .title-dynamic .small-title {
-      font-size: 0.45em;
-      font-weight: 500;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      display: block;
-      color: #b0c4de;
-      margin-bottom: -5px;
-    }
-    .title-dynamic .arrow-icon {
-      color: #00E676;
-      font-weight: 400;
-      margin: 0 10px;
-      display: inline-block;
-    }
+    .hero-cta { position: absolute; bottom: 4rem; right: 4rem; z-index: 10; }
+    .btn-hero { background: var(--mint-green); border: none; padding: 1.1rem 2.8rem; border-radius: 80px; font-weight: 800; font-size: 1.15rem; color: var(--blue-dark); cursor: pointer; transition: 0.3s; box-shadow: 0 10px 30px rgba(167, 243, 208, 0.4); font-family: 'Inter', sans-serif; }
+    .btn-hero:hover { background: var(--violet-soft); transform: translateY(-3px); box-shadow: 0 15px 35px rgba(221, 214, 254, 0.5); }
 
-    /* TEXTO ESTRUCTURADO EN RENGLES Y BOLD */
-    .scannable-text {
-      font-size: clamp(1.1rem, 2vw, 1.35rem);
-      color: #d0dcee;
-      line-height: 1.7;
-    }
-    .text-line {
-      display: block;
-      margin-bottom: 0.8rem;
-    }
-    .text-line i {
-      color: #00E676;
-      margin-right: 10px;
-      font-size: 1.1rem;
-    }
-    .text-line strong {
-      color: white;
-      font-weight: 700;
-    }
+    /* SECCIONES BASE */
+    section { padding: 6rem 0; position: relative; z-index: 2; }
+    .section-title { font-size: clamp(2.6rem, 5vw, 3.8rem); font-weight: 900; letter-spacing: -0.02em; line-height: 1.1; margin-bottom: 2.5rem; color: var(--blue-dark); }
+    .section-subtitle { color: var(--text-dark); font-size: 1.15rem; max-width: 700px; margin-top: -1.5rem; margin-bottom: 3.5rem; opacity: 0.8; }
 
-    .carousel-controls {
-      position: absolute;
-      bottom: 2.5rem;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 10;
-      display: flex;
-      gap: 1rem;
-    }
-    .carousel-dot {
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.25);
-      border: none;
-      cursor: pointer !important;
-      transition: all 0.3s;
-      z-index: 11;
-    }
-    .carousel-dot.active {
-      background: #00E676;
-      box-shadow: 0 0 20px #00e67688;
-      transform: scale(1.2);
-    }
-    .hero-cta {
-      position: absolute;
-      bottom: 5rem;
-      right: 2.5rem;
-      z-index: 10;
-    }
-    .btn-hero {
-      background: #00E676;
-      border: none;
-      padding: 1rem 2.6rem;
-      border-radius: 80px;
-      font-weight: 700;
-      font-size: 1.2rem;
-      color: #0A1128;
-      cursor: pointer !important;
-      transition: all 0.25s;
-      box-shadow: 0 0 30px #00e67666;
-      font-family: 'Inter', sans-serif;
-      animation: glowPulse 2.5s infinite;
-    }
-    .btn-hero:hover {
-      background: #00c853;
-      transform: scale(1.03);
-      box-shadow: 0 0 50px #00e676aa;
-    }
-    @keyframes glowPulse {
-      0% { box-shadow: 0 0 20px #00e67655; }
-      50% { box-shadow: 0 0 50px #00e676cc; }
-      100% { box-shadow: 0 0 20px #00e67655; }
-    }
-
-    /* SECCIONES */
-    section {
-      padding: 6rem 0;
-      position: relative;
-      z-index: 2;
-    }
-    .bg-cream {
-      background: #F4F4F9;
-      color: #0A1128;
-    }
-    .bg-dark {
-      background: #0A1128;
-      color: #F4F4F9;
-    }
-    .section-title {
-      font-size: clamp(2.6rem, 5vw, 4rem);
-      font-weight: 800;
-      letter-spacing: -0.02em;
-      line-height: 1.1;
-      margin-bottom: 2.5rem;
-    }
-
-    /* ESENCIA: BULLETS EN LUGAR DE TEXTO CORRIDO */
-    .esencia-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2.5rem;
-    }
+    /* ESENCIA */
+    .esencia-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
     .esencia-card {
-      background: rgba(255, 255, 255, 0.04);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      border-radius: 28px;
-      padding: 2.5rem 2.2rem;
-      transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-      cursor: default;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+      background: var(--blue-dark); border-radius: 32px; padding: 3rem 2.2rem; transition: 0.4s;
+      color: var(--bg-cream); position: relative; overflow: hidden;
     }
-    .esencia-card .card-icon {
-      font-size: 2.8rem;
-      color: #00E676;
-      margin-bottom: 1rem;
-      transition: transform 0.4s;
-    }
-    .esencia-card h3 {
-      font-size: 1.55rem;
-      font-weight: 800;
-      margin-bottom: 1rem;
-      line-height: 1.2;
-    }
-    .esencia-card .card-reveal {
-      max-height: 0;
-      overflow: hidden;
-      opacity: 0;
-      transition: max-height 0.6s ease, opacity 0.5s ease;
-      font-size: 0.98rem;
-      line-height: 1.6;
-    }
-    /* Estructura interna de viñetas limpias */
-    .reveal-bullet {
-      display: block;
-      margin-bottom: 0.6rem;
-      position: relative;
-      padding-left: 15px;
-    }
-    .reveal-bullet::before {
-      content: "•";
-      color: #00E676;
-      position: absolute;
-      left: 0;
-      font-weight: bold;
-    }
-    .esencia-card:hover {
-      transform: translateY(-8px);
-      border-color: rgba(0, 230, 118, 0.3);
-      box-shadow: 0 16px 48px rgba(0, 230, 118, 0.12);
-    }
-    .esencia-card:hover .card-reveal {
-      max-height: 300px;
-      opacity: 1;
-    }
-    .esencia-card:hover .card-icon { transform: scale(1.08); }
+    .esencia-card:nth-child(1) .card-icon { color: var(--mint-green); background: rgba(167, 243, 208, 0.1); }
+    .esencia-card:nth-child(2) .card-icon { color: var(--violet-soft); background: rgba(221, 214, 254, 0.1); }
+    .esencia-card:nth-child(3) .card-icon { color: var(--mint-green); background: rgba(167, 243, 208, 0.1); }
     
-    .esencia-card.bg-cream {
-      background: rgba(255, 255, 255, 0.85);
-      border: 1px solid rgba(10, 17, 40, 0.06);
-    }
-    .esencia-card.bg-cream .reveal-bullet { color: #2e3d52; }
-    .esencia-card.bg-cream .reveal-bullet strong { color: #0A1128; }
+    .esencia-card .card-icon { display: inline-flex; align-items: center; justify-content: center; width: 70px; height: 70px; border-radius: 20px; font-size: 2rem; margin-bottom: 1.5rem; }
+    .esencia-card h3 { font-size: 1.6rem; font-weight: 800; margin-bottom: 1rem; line-height: 1.2; }
+    .esencia-card .card-reveal { max-height: 0; overflow: hidden; opacity: 0; transition: max-height 0.6s ease, opacity 0.5s ease; font-size: 1rem; line-height: 1.6; color: #cbd5e1; }
+    .reveal-bullet { display: block; margin-bottom: 0.8rem; position: relative; padding-left: 20px; }
+    .esencia-card:nth-child(odd) .reveal-bullet::before { content: "•"; color: var(--mint-green); position: absolute; left: 0; font-size: 1.5rem; line-height: 1; }
+    .esencia-card:nth-child(even) .reveal-bullet::before { content: "•"; color: var(--violet-soft); position: absolute; left: 0; font-size: 1.5rem; line-height: 1; }
+    .reveal-bullet strong { color: var(--bg-cream); }
+    
+    .esencia-card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(30, 58, 138, 0.15); }
+    .esencia-card:hover .card-reveal { max-height: 300px; opacity: 1; margin-top: 1.5rem; }
 
-    /* REGLAS MÓVIL: Siempre abierto */
-    @media (max-width: 900px) {
-      .esencia-card .card-reveal {
-        max-height: 500px !important;
-        opacity: 1 !important;
-        overflow: visible !important;
-      }
-      .esencia-card:hover { transform: none !important; }
+    /* ÁREAS DE ENFOQUE */
+    .areas-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3rem; flex-wrap: wrap; gap: 1rem; }
+    .btn-outline {
+      background: transparent; border: 2px solid var(--blue-dark); color: var(--blue-dark); padding: 0.8rem 1.8rem;
+      border-radius: 40px; cursor: pointer; transition: 0.3s; font-family: 'Inter', sans-serif; font-weight: 700; font-size: 0.95rem;
     }
+    .btn-outline:hover { background: var(--blue-dark); color: var(--bg-cream); }
+    
+    .materias-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    
+    .materia-box {
+      background: var(--blue-dark); border-radius: 28px; padding: 2rem; transition: all 0.4s; cursor: pointer;
+      display: flex; flex-direction: column; color: var(--bg-cream); border: 2px solid transparent;
+    }
+    .materia-box:hover { border-color: var(--violet-soft); box-shadow: 0 15px 35px rgba(30, 58, 138, 0.15); transform: translateY(-5px); }
+    
+    .materia-box .box-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 0.5rem; }
+    .materia-box:nth-child(odd) .box-header i { color: var(--mint-green); }
+    .materia-box:nth-child(even) .box-header i { color: var(--violet-soft); }
+    .materia-box .box-header i { font-size: 1.6rem; }
+    .materia-box h3 { font-size: 1.25rem; font-weight: 700; line-height: 1.2; }
+    
+    /* Texto "Ver más" simplificado */
+    .materia-box .click-hint { font-size: 0.85rem; color: var(--mint-green); opacity: 0.8; margin-top: 15px; font-weight: 500; transition: 0.3s; }
+    .materia-box:nth-child(even) .click-hint { color: var(--violet-soft); }
+    
+    .materia-box .subtemas-list {
+      max-height: 0; overflow: hidden; opacity: 0; transition: max-height 0.5s ease, opacity 0.4s ease;
+      list-style: none; margin-top: 0; color: #cbd5e1;
+    }
+    .materia-box .subtemas-list li { font-size: 0.95rem; margin-bottom: 0.6rem; padding-left: 18px; position: relative; }
+    .materia-box:nth-child(odd) .subtemas-list li::before { content: "→"; color: var(--mint-green); position: absolute; left: 0; font-weight: bold; }
+    .materia-box:nth-child(even) .subtemas-list li::before { content: "→"; color: var(--violet-soft); position: absolute; left: 0; font-weight: bold; }
+    
+    .materia-box.expanded { border-color: var(--mint-green); background: #172d6e; }
+    .materia-box.expanded .subtemas-list { max-height: 400px; opacity: 1; margin-top: 1.5rem; }
+    .materia-box.expanded .click-hint { display: none; }
+    
+    /* Cajita 6 CTA */
+    .cta-box { align-items: center; justify-content: center; background: rgba(30, 58, 138, 0.05); border: 2px dashed var(--blue-dark); color: var(--blue-dark); }
+    .cta-box:hover { background: var(--violet-soft); border-style: solid; border-color: var(--violet-soft); color: var(--blue-dark); }
+    .cta-box h3 { color: var(--blue-dark); }
+    .cta-btn-inside { background: var(--blue-dark); color: var(--mint-green); padding: 0.6rem 1.4rem; border-radius: 30px; font-weight: 700; font-size: 0.9rem; margin-top: 1rem; }
 
-    /* SPLIT SCROLL */
-    .split-wrapper {
-      display: flex;
-      flex-wrap: wrap;
+    /* SHOWCASE DE MENTORES */
+    .showcase-wrapper { display: flex; flex-direction: column; gap: 4rem; }
+    .profile-card {
+      display: flex; align-items: center; gap: 4rem; background: var(--blue-dark);
+      border-radius: 40px; padding: 3.5rem; transition: 0.4s; color: var(--bg-cream);
     }
-    .split-sticky {
-      flex: 1 1 50%;
-      background: #0A1128;
-      padding: 2.5rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      position: sticky;
-      top: 80px;
-      align-self: flex-start;
-      min-height: 400px;
+    .profile-card:hover { transform: translateY(-5px); box-shadow: 0 20px 50px rgba(30, 58, 138, 0.2); }
+    .profile-card.reverse { flex-direction: row-reverse; }
+    
+    .profile-image-container { position: relative; flex-shrink: 0; }
+    .profile-img { width: 300px; height: 300px; border-radius: 50%; object-fit: cover; border: 6px solid var(--bg-cream); }
+    .floating-badge {
+      position: absolute; font-weight: 800; padding: 0.7rem 1.4rem; color: var(--blue-dark);
+      border-radius: 30px; font-size: 0.95rem; box-shadow: 0 10px 20px rgba(0,0,0,0.2);
     }
-    .split-scroll {
-      flex: 1 1 50%;
-      padding: 2rem 2rem 2rem 0;
-      display: flex;
-      flex-direction: column;
-      gap: 3rem;
-    }
-    .split-scroll .profile-item {
-      background: rgba(255,255,255,0.02);
-      border-radius: 24px;
-      padding: 2.2rem;
-      border-left: 4px solid #00E676;
-      transition: transform 0.3s;
-    }
-    .split-scroll .profile-item:hover {
-      background: rgba(255,255,255,0.04);
-      transform: translateX(8px);
-    }
-    .profile-item h3 {
-      font-size: 1.7rem;
-      font-weight: 700;
-      margin-bottom: 0.8rem;
-    }
-    .profile-item ul {
-      list-style: none;
-      font-size: 1.05rem;
-      line-height: 1.8;
-    }
-    .profile-item ul li { margin-bottom: 0.4rem; }
-    .profile-item ul li::before {
-      content: "▹ ";
-      color: #00E676;
-      font-weight: 800;
-    }
+    .badge-mint { background: var(--mint-green); top: 20px; right: -20px; }
+    .badge-violet { background: var(--violet-soft); bottom: 20px; left: -20px; }
+    
+    .profile-info { flex-grow: 1; }
+    .profile-info h3 { font-size: 2.5rem; margin-bottom: 0.5rem; }
+    .profile-role { font-size: 1.1rem; color: var(--mint-green); font-weight: 700; margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: 1px; }
+    .profile-card.reverse .profile-role { color: var(--violet-soft); }
+    .profile-bio { color: #cbd5e1; font-size: 1.15rem; line-height: 1.7; margin-bottom: 1.2rem; }
+    .profile-bio strong { color: var(--bg-cream); }
+    .profile-bio.human { font-size: 1.05rem; opacity: 0.9; }
 
-    /* ACORDEÓN METODOLOGÍA: FORMATEADO EN LÍNEAS SUELTAS Y ÍCONOS */
-    .acordeon {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      margin-top: 2rem;
-    }
-    .acordeon-item {
-      background: rgba(255,255,255,0.02);
-      border-radius: 20px;
-      border: 1px solid rgba(255,255,255,0.04);
-      overflow: hidden;
-      transition: all 0.3s;
-    }
-    .acordeon-header {
-      display: flex;
-      align-items: center;
-      gap: 1.2rem;
-      padding: 1.5rem 2rem;
-      cursor: pointer !important;
-      font-weight: 700;
-      font-size: 1.4rem;
-      user-select: none;
-    }
-    .acordeon-header:hover { background: rgba(0, 230, 118, 0.04); }
-    .acordeon-header .num {
-      font-size: 2.4rem;
-      font-weight: 900;
-      color: #00E676;
-      min-width: 48px;
-    }
-    .acordeon-body {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.5s cubic-bezier(0.23, 1, 0.32, 1), padding 0.3s;
-      padding: 0 2rem;
-      color: #d0dcee;
-      font-size: 1.1rem;
-      line-height: 1.7;
-    }
-    .acordeon-body-line {
-      display: block;
-      margin-bottom: 0.6rem;
-    }
-    .acordeon-body-line i {
-      color: #00E676;
-      margin-right: 8px;
-      font-size: 0.95rem;
-    }
-    .acordeon-item.open .acordeon-body {
-      max-height: 250px;
-      padding: 0 2rem 2rem 5.2rem; /* Alineado perfecto debajo del título */
-    }
-    .acordeon-item.open {
-      background: rgba(0, 230, 118, 0.02);
-      border-color: rgba(0, 230, 118, 0.15);
-    }
+    /* ACORDEON METODOLOGIA */
+    .acordeon { display: flex; flex-direction: column; gap: 1.2rem; }
+    .acordeon-item { background: var(--blue-dark); border-radius: 24px; overflow: hidden; transition: 0.3s; color: var(--bg-cream); }
+    .acordeon-header { display: flex; align-items: center; gap: 1.5rem; padding: 1.8rem 2.5rem; cursor: pointer; font-weight: 800; font-size: 1.4rem; user-select: none; }
+    .acordeon-header:hover { background: #172d6e; }
+    
+    .acordeon-item:nth-child(odd) .num { color: var(--mint-green); }
+    .acordeon-item:nth-child(even) .num { color: var(--violet-soft); }
+    .acordeon-header .num { font-size: 2.2rem; font-weight: 900; min-width: 40px; }
+    
+    .acordeon-body { max-height: 0; overflow: hidden; transition: max-height 0.5s ease, padding 0.3s; padding: 0 2.5rem; color: #cbd5e1; font-size: 1.1rem; line-height: 1.7; }
+    .acordeon-body-line { display: block; margin-bottom: 0.8rem; }
+    .acordeon-item:nth-child(odd) .acordeon-body-line i { color: var(--mint-green); margin-right: 10px; }
+    .acordeon-item:nth-child(even) .acordeon-body-line i { color: var(--violet-soft); margin-right: 10px; }
+    .acordeon-body-line strong { color: var(--bg-cream); }
+    
+    .acordeon-item.open .acordeon-body { max-height: 300px; padding: 0 2.5rem 2.5rem 6.2rem; }
+    .acordeon-item.open { border-left: 8px solid var(--mint-green); }
+    .acordeon-item:nth-child(even).open { border-left: 8px solid var(--violet-soft); }
 
-    /* FOOTER CTA */
-    .footer-cta {
-      background: #0A1128;
-      padding: 6rem 1rem;
-      text-align: center;
-      border-top: 1px solid #1f304a;
-      position: relative;
+    /* PREMIUM CLOSING REDISEÑADO */
+    .premium-closing { background: var(--blue-dark); padding: 6rem 0 3rem 0; position: relative; color: var(--bg-cream); border-top-left-radius: 60px; border-top-right-radius: 60px; margin-top: 4rem; }
+    .closing-inner { max-width: 1000px; margin: 0 auto; text-align: center; }
+    
+    .pre-title { font-size: 1.2rem; font-weight: 700; color: var(--violet-soft); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 1rem; }
+    .main-title { font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 900; line-height: 1.1; margin-bottom: 4rem; }
+    .main-title span { color: var(--mint-green); }
+
+    .closing-columns { display: flex; gap: 2rem; margin-bottom: 4rem; text-align: left; }
+    .col-box {
+      flex: 1; background: rgba(253, 251, 247, 0.05); border: 1px solid rgba(221, 214, 254, 0.2);
+      padding: 2.5rem; border-radius: 30px; transition: 0.3s;
     }
-    .footer-cta h2 {
-      font-size: clamp(2.3rem, 7vw, 4.5rem);
-      font-weight: 900;
-      max-width: 1000px;
-      margin: 0 auto 1.5rem;
-      line-height: 1.1;
+    .col-box:hover { background: rgba(253, 251, 247, 0.1); border-color: var(--mint-green); transform: translateY(-5px); }
+    .col-box i { font-size: 2.5rem; margin-bottom: 1.5rem; }
+    .col-box:nth-child(1) i { color: var(--mint-green); }
+    .col-box:nth-child(2) i { color: var(--violet-soft); }
+    .col-box p { font-size: 1.15rem; line-height: 1.7; color: #e2e8f0; font-weight: 400; }
+
+    /* Botón final actualizado */
+    .whatsapp-final-wrapper {
+      background: rgba(0,0,0,0.2); padding: 15px; border-radius: 80px; display: inline-block;
+      box-shadow: inset 0 0 20px rgba(0,0,0,0.2);
     }
-    .footer-cta p {
-      font-size: 1.35rem;
-      color: #bcc9e0;
-      max-width: 660px;
-      margin: 0 auto 2.5rem;
+    .btn-whatsapp-final {
+      background: var(--mint-green); color: var(--blue-dark); padding: 1.2rem 3.5rem;
+      border-radius: 60px; font-weight: 900; font-size: 1.3rem; font-family: 'Inter', sans-serif;
+      border: none; cursor: pointer; transition: 0.3s;
     }
-    .btn-pulse {
-      background: #00E676;
-      border: none;
-      padding: 1.2rem 3.5rem;
-      border-radius: 80px;
-      font-weight: 700;
-      font-size: 1.5rem;
-      color: #0A1128;
-      cursor: pointer !important;
-      animation: pulse 2.2s infinite;
-      font-family: 'Inter', sans-serif;
-      box-shadow: 0 0 44px #00e67666;
-    }
-    @keyframes pulse {
-      0% { box-shadow: 0 0 0 0 #00e67666; }
-      70% { box-shadow: 0 0 0 24px #00e67600; }
-      100% { box-shadow: 0 0 0 0 #00e67600; }
-    }
-    .trust-logos {
-      margin-top: 3.5rem;
-      display: flex;
-      justify-content: center;
-      gap: 3rem;
-      font-weight: 600;
-      color: #5f7396;
-      font-size: 0.95rem;
-      flex-wrap: wrap;
-    }
-    .copyright {
-      margin-top: 2.5rem;
-      color: #3a4b6a;
-      font-size: 0.9rem;
-    }
+    .btn-whatsapp-final:hover { background: var(--violet-soft); transform: scale(1.03); box-shadow: 0 10px 30px rgba(221, 214, 254, 0.4); }
+    
+    .credibility-footer { margin-top: 6rem; border-top: 1px solid rgba(253, 251, 247, 0.1); padding-top: 3rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 2rem; }
+    
+    .egresados-label { display: block; font-size: 0.85rem; color: var(--violet-soft); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.5rem; font-weight: 700; }
+    .trust-badge-group { display: flex; gap: 2.5rem; color: #cbd5e1; font-weight: 600; font-size: 1rem; align-items: center;}
+    .trust-badge-group span i { color: var(--mint-green); margin-right: 10px; font-size: 1.2rem; }
+    
+    .copyright { color: #94a3b8; font-size: 0.95rem; }
 
     /* RESPONSIVE */
+    @media (max-width: 1000px) { 
+      .materias-grid { grid-template-columns: repeat(2, 1fr); }
+      .closing-columns { flex-direction: column; }
+    }
     @media (max-width: 900px) {
-      .nav-links {
-        display: none;
-        flex-direction: column;
-        width: 100%;
-        gap: 0.8rem;
-        padding: 1.2rem 0;
-        background: #0A1128;
-      }
+      .hero-carousel { margin: 0; border-radius: 0; }
+      .carousel-slide { padding: 0 2rem; }
+      .hero-cta { bottom: 2rem; right: 50%; transform: translateX(50%); width: 90%; text-align: center; }
+      .btn-hero { width: 100%; padding: 1rem; }
+      
+      .nav-links { display: none; flex-direction: column; width: 100%; gap: 0.8rem; padding: 1.2rem 0; background: var(--bg-cream); }
       .nav-links.open { display: flex; }
       .hamburger { display: flex; }
       .header-actions .btn-neon { display: none; }
-      .split-sticky, .split-scroll {
-        flex: 1 1 100%;
-        position: static;
-        padding: 1.5rem;
-      }
+      .showcase-wrapper { gap: 3rem; }
+      .profile-card, .profile-card.reverse { flex-direction: column; text-align: center; padding: 2.5rem; }
+      .badge-mint { right: auto; left: 50%; transform: translateX(-50%); top: -15px; } 
+      .badge-violet { left: 50%; transform: translateX(-50%); bottom: -15px; }
       .acordeon-item.open .acordeon-body { padding: 0 1.5rem 1.5rem 1.5rem; }
+      .credibility-footer { flex-direction: column; text-align: center; }
+      .trust-badge-group { flex-direction: column; gap: 1rem; justify-content: center; width: 100%;}
+    }
+    @media (max-width: 650px) {
+      .materias-grid { grid-template-columns: 1fr; }
+      .btn-whatsapp-final { padding: 1rem 1.5rem; font-size: 1.1rem; width: 100%; }
+      .whatsapp-final-wrapper { width: 100%; }
     }
   </style>
 </head>
@@ -634,19 +298,18 @@
 
   <div class="floating-symbols" id="floatingSymbols"></div>
 
-  <div class="custom-cursor" id="customCursor"></div>
-
   <header>
     <div class="container header-inner">
       <div class="logo">DUO<span>CLASS</span></div>
       <ul class="nav-links" id="navLinks">
         <li><a href="#nosotros">Nosotros</a></li>
-        <li><a href="#esencia">Nuestra Esencia</a></li>
+        <li><a href="#esencia">Esencia</a></li>
+        <li><a href="#areas">Áreas</a></li>
         <li><a href="#metodologia">Metodología</a></li>
       </ul>
       <div class="header-actions">
-        <button class="btn-neon" id="whatsappHeaderBtn">Conoce a tus profesores</button>
-        <button class="btn-neon-whatsapp" id="whatsappHeaderBtn2">WhatsApp</button>
+        <button class="btn-neon btn-whatsapp">Conoce a tus profesores</button>
+        <button class="btn-neon-whatsapp btn-whatsapp">WhatsApp</button>
         <button class="hamburger" id="hamburgerBtn" aria-label="Menú">
           <span></span><span></span><span></span>
         </button>
@@ -654,11 +317,13 @@
     </div>
   </header>
 
+  <!-- SECCIÓN DE BANNERS CON FOTOS -->
   <section class="hero-carousel" id="nosotros">
     
-    <div class="carousel-slide active">
+    <!-- Banner 1: Usa foto1.jpg -->
+    <div class="carousel-slide active" style="background-image: url('foto1.jpg');">
       <div class="container slide-content">
-        <h1>Menos frustración.<br><span class="highlight">Más confianza.</span></h1>
+        <h1>Menos frustración.<br><span class="highlight-mint">Más confianza.</span></h1>
         <p class="scannable-text">
           <span class="text-line"><i class="fas fa-users"></i> En un aula con 30 alumnos, <strong>es muy fácil perder el ritmo</strong>.</span>
           <span class="text-line"><i class="fas fa-bullseye"></i> En nuestras <strong>sesiones personalizadas 1 a 1</strong> detectamos los vacíos exactos.</span>
@@ -667,23 +332,22 @@
       </div>
     </div>
     
-    <div class="carousel-slide">
+    <!-- Banner 2: Usa foto2.jpg -->
+    <div class="carousel-slide" style="background-image: url('foto2.jpg');">
       <div class="container slide-content">
-        <h1 class="title-dynamic">
-          <span class="small-title">De la</span>
-          ansiedad <span class="arrow-icon">→</span> a la <span class="highlight">seguridad.</span>
-        </h1>
+        <h1 class="title-dynamic"><span class="small-title">De la</span> ansiedad <span class="arrow-icon">→</span> a la <span class="highlight-violet">seguridad.</span></h1>
         <p class="scannable-text">
           <span class="text-line"><i class="fas fa-heart"></i> Sabemos que ver a tu hijo abrumado por los números <strong>es difícil para toda la familia</strong>.</span>
           <span class="text-line"><i class="fas fa-shield-alt"></i> No necesitas un tutor tradicional; <strong>buscas mentores de confianza</strong>.</span>
-          <span class="text-line"><i class="fas fa-smile"></i> Alguien que le devuelva la tranquilidad, la sonrisa y la seguridad en sí mismo.</span>
+          <span class="text-line"><i class="fas fa-smile"></i> Alguien que le devuelva la tranquilidad y la seguridad en sí mismo.</span>
         </p>
       </div>
     </div>
     
-    <div class="carousel-slide">
+    <!-- Banner 3: Usa foto3.jpg -->
+    <div class="carousel-slide" style="background-image: url('foto3.jpg');">
       <div class="container slide-content">
-        <h1>¿Construir desde cero <br>o <span class="highlight">afianzar conocimientos?</span></h1>
+        <h1>¿Construir desde cero <br>o <span class="highlight-mint">afianzar conocimientos?</span></h1>
         <p class="scannable-text">
           <span class="text-line"><i class="fas fa-seedling"></i> <strong>Desde cero:</strong> Diseñamos bases sólidas si siente que no entiende nada.</span>
           <span class="text-line"><i class="fas fa-graduation-cap"></i> <strong>Refuerzo estratégico:</strong> Nos preparamos para un parcial o examen importante.</span>
@@ -693,7 +357,7 @@
     </div>
 
     <div class="hero-cta">
-      <button class="btn-hero" id="heroWhatsapp">Conversemos por WhatsApp ↗</button>
+      <button class="btn-hero btn-whatsapp">Conversemos por WhatsApp ↗</button>
     </div>
     
     <div class="carousel-controls">
@@ -703,12 +367,13 @@
     </div>
   </section>
 
-  <section id="esencia" class="bg-cream">
+  <section id="esencia">
     <div class="container">
-      <h2 class="section-title">Nuestra <span style="color:#00c853;">Esencia</span></h2>
+      <h2 class="section-title">Nuestra <span style="color:var(--blue-dark);">Esencia</span></h2>
+      <p class="section-subtitle">Lo que nos hace diferentes a una clase de refuerzo tradicional.</p>
+      
       <div class="esencia-grid">
-        
-        <div class="esencia-card bg-cream">
+        <div class="esencia-card">
           <div class="card-icon"><i class="fas fa-brain"></i></div>
           <h3>Que lo entienda, no que lo memorice.</h3>
           <div class="card-reveal">
@@ -717,8 +382,7 @@
             <span class="reveal-bullet">Al descubrir el <strong>"por qué"</strong>, el miedo se va.</span>
           </div>
         </div>
-        
-        <div class="esencia-card bg-cream">
+        <div class="esencia-card">
           <div class="card-icon"><i class="fas fa-comments"></i></div>
           <h3>Aquí el protagonista es tu hijo.</h3>
           <div class="card-reveal">
@@ -727,8 +391,7 @@
             <span class="reveal-bullet">Nosotros solo guiamos; el éxito es suyo.</span>
           </div>
         </div>
-        
-        <div class="esencia-card bg-cream">
+        <div class="esencia-card">
           <div class="card-icon"><i class="fas fa-mountain"></i></div>
           <h3>Cambiamos el estrés por un respiro.</h3>
           <div class="card-reveal">
@@ -737,48 +400,166 @@
             <span class="reveal-bullet">Pasa del "no soy capaz" al <strong>"puedo paso a paso"</strong>.</span>
           </div>
         </div>
-
       </div>
     </div>
   </section>
 
-  <section class="bg-dark">
+  <!-- ÁREAS DE ENFOQUE -->
+  <section id="areas">
     <div class="container">
-      <h2 class="section-title" style="color:#00E676;">Conoce a tu <span style="color:white;">Duo</span></h2>
-    </div>
-    <div class="split-wrapper">
-      <div class="split-sticky">
-        <h2 style="font-size: 2.8rem; font-weight: 800; line-height:1.1;">Mentores <br>con <span style="color:#00E676;">corazón</span></h2>
-        <p style="color:#b0c8e5; margin-top:1rem; max-width:400px;">Dos ingenieros, una misión: transformar el pánico en confianza.</p>
-      </div>
-      <div class="split-scroll">
-        <div class="profile-item">
-          <h3><i class="fas fa-chart-line" style="color:#00E676; margin-right:0.5rem;"></i>Pensamiento Analítico y Empatía</h3>
-          <ul>
-            <li>Ingeniera Industrial</li>
-            <li>Máster en Analytics (Imperial College London)</li>
-            <li>Graduada con Honores</li>
-            <li>Apasionada por desbloquear el potencial matemático mediante la escucha y la paciencia.</li>
-          </ul>
+      <div class="areas-header">
+        <div>
+          <h2 class="section-title" style="margin-bottom: 0.5rem;">Áreas de Estudio</h2>
+          <p class="section-subtitle" style="margin-bottom: 0;">Desde apoyo escolar hasta los retos del cálculo universitario. Haz clic en las tarjetas.</p>
         </div>
-        <div class="profile-item">
-          <h3><i class="fas fa-compass" style="color:#00E676; margin-right:0.5rem;"></i>Lógica, Estructura y Cercanía</h3>
-          <ul>
-            <li>Ingeniero Civil</li>
-            <li>Máster en Geotecnia (PUJ)</li>
-            <li>Profesor Universitario</li>
-            <li>Más de 15 años acompañando a estudiantes a descubrir que la física puede ser amigable.</li>
-          </ul>
-        </div>
+        <button class="btn-outline" id="expandAllBtn">Ver detalle de todas</button>
       </div>
-    </div>
-  </section>
-
-  <section id="metodologia" class="bg-dark">
-    <div class="container">
-      <h2 class="section-title" style="color:#00E676;">Cómo los acompañamos</h2>
-      <div class="acordeon">
+      
+      <div class="materias-grid">
         
+        <div class="materia-box materia-box-clickable">
+          <div class="box-header">
+            <i class="fas fa-calculator"></i>
+            <h3>Matemáticas Fundamentales</h3>
+          </div>
+          <div class="click-hint">Ver más ↓</div>
+          <ul class="subtemas-list">
+            <li>Operaciones matemáticas elementales</li>
+            <li>Fracciones, decimales y porcentajes</li>
+            <li>Razonamiento lógico y cuantitativo</li>
+            <li>Nivelación para bases escolares</li>
+          </ul>
+        </div>
+
+        <div class="materia-box materia-box-clickable">
+          <div class="box-header">
+            <i class="fas fa-project-diagram"></i>
+            <h3>Álgebra y Funciones</h3>
+          </div>
+          <div class="click-hint">Ver más ↓</div>
+          <ul class="subtemas-list">
+            <li>Álgebra elemental y expresiones</li>
+            <li>Sistemas de ecuaciones (lineales y cuadráticas)</li>
+            <li>Factorización y productos notables</li>
+            <li>Estudio de funciones y gráficas</li>
+          </ul>
+        </div>
+
+        <div class="materia-box materia-box-clickable">
+          <div class="box-header">
+            <i class="fas fa-shapes"></i>
+            <h3>Geometría y Trigonometría</h3>
+          </div>
+          <div class="click-hint">Ver más ↓</div>
+          <ul class="subtemas-list">
+            <li>Geometría analítica y plana</li>
+            <li>Cálculo de áreas, perímetros y volúmenes</li>
+            <li>Funciones e identidades trigonométricas</li>
+            <li>Vectores en el plano y el espacio</li>
+          </ul>
+        </div>
+
+        <div class="materia-box materia-box-clickable">
+          <div class="box-header">
+            <i class="fas fa-infinity"></i>
+            <h3>Cálculo y Ciencias Exactas</h3>
+          </div>
+          <div class="click-hint">Ver más ↓</div>
+          <ul class="subtemas-list">
+            <li>Límites, continuidad y derivadas</li>
+            <li>Cálculo integral y sus aplicaciones</li>
+            <li>Física elemental y mecánica clásica</li>
+            <li>Estructura mental para ciencias universitarias</li>
+          </ul>
+        </div>
+
+        <div class="materia-box materia-box-clickable">
+          <div class="box-header">
+            <i class="fas fa-chart-bar"></i>
+            <h3>Estadística y Probabilidad</h3>
+          </div>
+          <div class="click-hint">Ver más ↓</div>
+          <ul class="subtemas-list">
+            <li>Estadística descriptiva básica</li>
+            <li>Medidas de tendencia central y dispersión</li>
+            <li>Teoría de probabilidad elemental</li>
+            <li>Análisis de datos y gráficos</li>
+          </ul>
+        </div>
+
+        <!-- Cajita 6: Call To Action -->
+        <div class="materia-box cta-box btn-whatsapp">
+          <i class="fas fa-search" style="font-size: 2.5rem; color: var(--violet-soft); margin-bottom: 1rem;"></i>
+          <h3 style="margin-bottom: 0.5rem; text-align: center;">¿Buscas otro tema?</h3>
+          <p style="font-size: 0.95rem; margin-bottom: 1rem; text-align: center; color: var(--text-dark);">
+            Pregúntanos sin pena. Dominamos muchas áreas más.
+          </p>
+          <div class="cta-btn-inside">Consultar materia</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SHOWCASE DE MENTORES -->
+  <section>
+    <div class="container">
+      <h2 class="section-title">Conoce a tu Duo</h2>
+      <p class="section-subtitle">
+        Entendemos que cada mente es única. Con nuestra trayectoria en el mundo profesional, hemos salido de la teoría tradicional del aula para llevar la ciencia a <strong>casos de la vida real</strong>. Hacemos el aprendizaje mucho más intuitivo.
+      </p>
+
+      <div class="showcase-wrapper">
+        
+        <!-- Perfil María Alejandra -->
+        <div class="profile-card">
+          <div class="profile-image-container">
+            <img src="foto-maria.jpg" alt="María Alejandra" class="profile-img">
+            <div class="floating-badge badge-mint">+10 Años Exp.</div>
+            <div class="floating-badge badge-violet">100% Bilingüe</div>
+          </div>
+          <div class="profile-info">
+            <h3>María Alejandra</h3>
+            <div class="profile-role">Pensamiento Analítico & Empatía</div>
+            <p class="profile-bio">
+              Ingeniera Industrial <strong>Summa Cum Laude</strong> de la Universidad Javeriana y Máster en Business Analytics del <strong>Imperial College London (la universidad #2 del mundo)</strong>. Su amplia experiencia trabajando con el análisis de datos en la industria le permite traducir conceptos abstractos en ejemplos prácticos reales.
+            </p>
+            <p class="profile-bio human">
+              Durante más de 10 años ha guiado a decenas de estudiantes a través del desafío que suponen las matemáticas. Su mentoría bilingüe se basa en la escucha genuina: sabe transformar la frustración en lógica pura, sin estrés.
+            </p>
+          </div>
+        </div>
+
+        <!-- Perfil Andrés Felipe -->
+        <div class="profile-card reverse">
+          <div class="profile-image-container">
+            <img src="foto-andres.jpg" alt="Andrés Felipe" class="profile-img">
+            <div class="floating-badge badge-violet">+15 Años Exp.</div>
+            <div class="floating-badge badge-mint">Profesor Universitario</div>
+          </div>
+          <div class="profile-info">
+            <h3>Andrés Felipe</h3>
+            <div class="profile-role">Lógica, Estructura & Cercanía</div>
+            <p class="profile-bio">
+              Ingeniero Civil y <strong>Magíster Cum Laude</strong> en Geotecnia de la Pontificia Universidad Javeriana. Combina su experiencia como Gerente Técnico de proyectos aplicados con su pasión genuina como <strong>Profesor Universitario activo</strong> en la facultad de ingeniería.
+            </p>
+            <p class="profile-bio human">
+              A lo largo de más de 15 años, ha acompañado la formación técnica de jóvenes. Su talento es traducir el cálculo —que suele parecer intimidante— a un lenguaje sencillo, dándole a los estudiantes la estructura mental exacta para desarmar problemas gigantes en soluciones lógicas.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- METODOLOGÍA -->
+  <section id="metodologia">
+    <div class="container">
+      <h2 class="section-title">Cómo los acompañamos</h2>
+      <p class="section-subtitle">Nuestra forma de trabajar garantiza avances reales sesión tras sesión.</p>
+      
+      <div class="acordeon">
         <div class="acordeon-item open">
           <div class="acordeon-header"><span class="num">1</span> Compañeros de equipo</div>
           <div class="acordeon-body">
@@ -786,7 +567,6 @@
             <span class="acordeon-body-line"><i class="fas fa-handshake"></i> <strong>Luego construimos:</strong> Lo resolvemos juntos en la pantalla para ganar soltura.</span>
           </div>
         </div>
-        
         <div class="acordeon-item">
           <div class="acordeon-header"><span class="num">2</span> Metas alcanzables</div>
           <div class="acordeon-body">
@@ -794,7 +574,6 @@
             <span class="acordeon-body-line"><i class="fas fa-check-circle"></i> <strong>Enfoque único:</strong> Tapamos el ruido y resolvemos estrictamente el siguiente paso lógico.</span>
           </div>
         </div>
-        
         <div class="acordeon-item">
           <div class="acordeon-header"><span class="num">3</span> Preguntas de rescate</div>
           <div class="acordeon-body">
@@ -802,7 +581,6 @@
             <span class="acordeon-body-line"><i class="fas fa-lightbulb"></i> <strong>Reinicio lógico:</strong> Hacemos preguntas obvias y sencillas para reactivar su confianza y calmar el estrés.</span>
           </div>
         </div>
-        
         <div class="acordeon-item">
           <div class="acordeon-header"><span class="num">4</span> El valor de intentar</div>
           <div class="acordeon-body">
@@ -810,50 +588,62 @@
             <span class="acordeon-body-line"><i class="fas fa-thumbs-up"></i> <strong>Auditoría amable:</strong> Le enseñamos a auditar su proceso con tranquilidad y celebrar el esfuerzo.</span>
           </div>
         </div>
-
       </div>
     </div>
   </section>
 
-  <footer class="footer-cta">
-    <h2>El pánico a los números es real.<br>Nuestra dedicación para vencerlo, también.</h2>
-    <p>Queremos que tu hijo vuelva a sonreír antes de un examen.</p>
-    <button class="btn-pulse" id="whatsappFooterBtn">Escríbenos por WhatsApp</button>
-    <div class="trust-logos">
-      <span><i class="fas fa-university"></i> Pontificia Universidad Javeriana</span>
-      <span><i class="fas fa-graduation-cap"></i> Imperial College London</span>
+  <!-- CIERRE ESTRATÉGICO REDISEÑADO -->
+  <footer class="premium-closing">
+    <div class="container">
+      
+      <div class="closing-inner">
+        <p class="pre-title">El pánico a los números es real.</p>
+        <h2 class="main-title">Nuestra dedicación para vencerlo, <span>también.</span></h2>
+        
+        <div class="closing-columns">
+          <div class="col-box">
+            <i class="fas fa-flag-checkered"></i>
+            <p>Hagamos que el próximo examen deje de ser un dolor de cabeza y se convierta en una meta en equipo.</p>
+          </div>
+          <div class="col-box">
+            <i class="fas fa-compass"></i>
+            <p>Diseñemos juntos un plan de mentoría a la medida para construir la confianza que tu hijo merece.</p>
+          </div>
+        </div>
+        
+        <!-- Botón final con el texto modificado -->
+        <div class="whatsapp-final-wrapper">
+          <button class="btn-whatsapp-final btn-whatsapp">Agenda tu primera sesión</button>
+        </div>
+      </div>
+      
+      <div class="credibility-footer">
+        <div>
+          <span class="egresados-label">Orgullosamente egresados de:</span>
+          <div class="trust-badge-group">
+            <span><i class="fas fa-university"></i> Pontificia Universidad Javeriana</span>
+            <span><i class="fas fa-graduation-cap"></i> Imperial College London</span>
+          </div>
+        </div>
+        <div class="copyright">© 2026 Duo Class. Mentoría de ingeniería con corazón.</div>
+      </div>
+      
     </div>
-    <div class="copyright">© 2026 Duo Class. Mentoría con corazón e ingeniería.</div>
   </footer>
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       
-      // ----- CUSTOM CURSOR (Aura decorativa) -----
-      const cursor = document.getElementById('customCursor');
-      if (cursor) {
-        document.addEventListener('mousemove', (e) => {
-          cursor.style.left = e.clientX + 'px';
-          cursor.style.top = e.clientY + 'px';
-        });
-        document.querySelectorAll('button, a, .acordeon-header, .esencia-card, .profile-item, .carousel-dot').forEach(el => {
-          el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
-          el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
-        });
-      }
-
-      // ----- FLOATING SYMBOLS (Parallax) -----
+      // Floating Symbols
       const symbols = ['+', '−', '∞', '∫', '∑', 'π', '√', '±'];
       const container = document.getElementById('floatingSymbols');
       if (container) {
-        for (let i = 0; i < 18; i++) {
+        for (let i = 0; i < 20; i++) {
           const span = document.createElement('span');
           span.className = 'symbol';
           span.textContent = symbols[i % symbols.length];
-          span.style.left = Math.random() * 90 + '%';
-          span.style.top = Math.random() * 90 + '%';
-          span.style.fontSize = (1.2 + Math.random() * 2.2) + 'rem';
-          span.style.opacity = 0.06 + Math.random() * 0.1;
+          span.style.left = Math.random() * 95 + '%'; span.style.top = Math.random() * 95 + '%';
+          span.style.fontSize = (1.5 + Math.random() * 2.5) + 'rem';
           span.dataset.speed = 0.02 + Math.random() * 0.04;
           container.appendChild(span);
         }
@@ -861,53 +651,66 @@
           const scrolled = window.scrollY;
           document.querySelectorAll('.symbol').forEach((el) => {
             const speed = parseFloat(el.dataset.speed);
-            const y = scrolled * speed * 0.6;
-            el.style.transform = `translateY(${y}px) rotate(${scrolled * 0.02}deg)`;
+            el.style.transform = `translateY(${scrolled * speed * 0.8}px) rotate(${scrolled * 0.05}deg)`;
           });
         });
       }
 
-      // ----- CAROUSEL DE BANNERS (Puntos y tiempo automático reparados) -----
+      // Carousel
       const slides = document.querySelectorAll('.carousel-slide');
       const dots = document.querySelectorAll('.carousel-dot');
       let currentSlide = 0;
       let slideInterval = setInterval(nextSlide, 6000);
 
       function goToSlide(index) {
-        slides.forEach((slide, i) => slide.classList.toggle('active', i === index));
-        dots.forEach((dot, i) => dot.classList.toggle('active', i === index));
+        slides.forEach((s, i) => s.classList.toggle('active', i === index));
+        dots.forEach((d, i) => d.classList.toggle('active', i === index));
         currentSlide = index;
       }
-
-      function nextSlide() {
-        goToSlide((currentSlide + 1) % slides.length);
-      }
-
+      function nextSlide() { goToSlide((currentSlide + 1) % slides.length); }
       dots.forEach((dot, index) => {
-        dot.addEventListener('click', () => {
-          clearInterval(slideInterval);
-          goToSlide(index);
-          slideInterval = setInterval(nextSlide, 6000);
-        });
+        dot.addEventListener('click', () => { clearInterval(slideInterval); goToSlide(index); slideInterval = setInterval(nextSlide, 6000); });
       });
 
-      // ----- ACORDEÓN DE METODOLOGÍA (Clics reparados) -----
-      const acordeonHeaders = document.querySelectorAll('.acordeon-header');
-      acordeonHeaders.forEach(header => {
+      // Acordeon Metodologia
+      document.querySelectorAll('.acordeon-header').forEach(header => {
         header.addEventListener('click', () => {
-          const item = header.parentElement;
-          item.classList.toggle('open');
+          header.parentElement.classList.toggle('open');
         });
       });
 
-      // ----- MENÚ HAMBURGUESA -----
+      // Expandir Cajas de Materias
+      const materiaBoxes = document.querySelectorAll('.materia-box-clickable');
+      const btnExpandAll = document.getElementById('expandAllBtn');
+      let allExpanded = false;
+
+      materiaBoxes.forEach(box => {
+        box.addEventListener('click', () => box.classList.toggle('expanded'));
+      });
+
+      btnExpandAll.addEventListener('click', () => {
+        allExpanded = !allExpanded;
+        materiaBoxes.forEach(box => {
+          if(allExpanded) box.classList.add('expanded');
+          else box.classList.remove('expanded');
+        });
+        btnExpandAll.textContent = allExpanded ? 'Ocultar todas' : 'Ver detalle de todas';
+      });
+
+      // Hamburguesa
       const hamburgerBtn = document.getElementById('hamburgerBtn');
       const navLinks = document.getElementById('navLinks');
       if (hamburgerBtn && navLinks) {
-        hamburgerBtn.addEventListener('click', () => {
-          navLinks.classList.toggle('open');
+        hamburgerBtn.addEventListener('click', () => navLinks.classList.toggle('open'));
+        navLinks.querySelectorAll('a').forEach(link => {
+          link.addEventListener('click', () => navLinks.classList.remove('open'));
         });
       }
+
+      // WhatsApp Action
+      document.querySelectorAll('.btn-whatsapp').forEach(btn => {
+        btn.addEventListener('click', () => window.open('https://wa.me/ту_numer_o?text=Hola,%20quisiera%20agendar%20un%20diagnóstico%20gratuito.', '_blank'));
+      });
     });
   </script>
 </body>
